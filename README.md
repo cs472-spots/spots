@@ -22,3 +22,13 @@ installation instructions [here](https://ngrok.com/download). Add its location t
 ngrok http 3000
 ```
 
+### Deploy to Heroku
+
+After installing the Heroku CLI tool, login to heroku with `heroku login`. Since
+we are only deploying the server directory, make sure that it is your current
+working directory.
+
+```
+npm run deploy
+```
+
