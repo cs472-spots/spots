@@ -12,6 +12,6 @@
   },
   "scripts": {
     "start": "node index.js",
-    "deploy": "git push heroku `git subtree split --prefix server master`:master"
+    "postinstall": "cd frontend && npm install && npm run build"
   }
 }
