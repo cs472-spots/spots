@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Deploy server directory as subtree to heroku
 # make sure you are already logged into heroku by running
 # `heroku login`
