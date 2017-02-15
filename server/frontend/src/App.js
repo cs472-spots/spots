@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.socket = SocketIOClient('http://localhost:3000');
+    this.socket = SocketIOClient('http://localhost:5000');
   }
 
   render() {
