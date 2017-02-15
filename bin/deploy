@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+# Deploy server directory as subtree to heroku
+# make sure you are already logged into heroku by running
+# `heroku login`
+
+git push --force heroku `git subtree split --prefix server master`:master
+
