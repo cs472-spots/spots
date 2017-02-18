@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SocketIOClient from 'socket.io-client';
-import logo from './logo.svg';
+import logo from '../assets/logo.svg';
 import './App.css';
 
 class App extends Component {
