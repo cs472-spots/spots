@@ -14,6 +14,9 @@ Clone the project with
 git clone https://git.heroku.com/unlv-spots.git
 ```
 
+Download a privatekey from firebase and name it `firebase-private-key.json`.
+Place it in the root directory.
+
 ### Server
 If you're developing on the server, first change directory to the server
 directory and run `npm install`. Start the server locally by runnning `npm start`.
