@@ -4,7 +4,5 @@ node_modules
 # React
 build
 
-# Firebase key
-firebase-private-key.json
-
+# Environment variables
 .env
