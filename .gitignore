@@ -6,3 +6,5 @@ build
 
 # Firebase key
 firebase-private-key.json
+
+.env
