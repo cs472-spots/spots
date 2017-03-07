@@ -14,8 +14,7 @@ Clone the project with
 git clone https://git.heroku.com/unlv-spots.git
 ```
 
-Download a privatekey from firebase and name it `firebase-private-key.json`.
-Place it in the root directory.
+Place a `.env` file containing all the credentials for firebase in `server/.env`.
 
 ### Server
 If you're developing on the server, first change directory to the server
