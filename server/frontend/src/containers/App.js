@@ -7,23 +7,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.socket = SocketIOClient('http://localhost:3000');
-    this.keyPressEvent = this.keyPressEvent.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
-        keyPressEvent() {
-          /**test to send out Object--not yet working
-           var name = 'Alex';
-           var nsheid = 300;
-           var permit = 'Student';
-           var data = {
-              Name: name,
-              NSHE: nsheid,
-              Permit: permit
-           };
-         **/
-
+        sendMessage() {
           this.socket.emit('hello', 'Hello from application');
-          this.socket.on('message', (message)=>{
+          console.log('Sending a message to the server');
+          this.socket.on('reply', (message)=>{
              console.log('Received the following messge from server: ' + message);
           });
         }
@@ -40,7 +30,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
                 <button
-                        onClick={this.keyPressEvent}>
+                        onClick={this.sendMessage}>
                         Send Message
                 </button>
 

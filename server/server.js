@@ -13,7 +13,11 @@ app.get('/', function(request, response) {
 });
 
 io.on('connection', (socket) => {
-  socket.emit('message', 'hello from server');
+  //Reply to application after receiving hello message
+  socket.on('hello', (msg)=> {
+      console.log("Message received: " + msg);
+      socket.emit('reply', "hello from the server side");
+  });
   console.log("Client connected");
 });
 
