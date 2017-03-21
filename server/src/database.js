@@ -1,4 +1,4 @@
-var ServiceAccount = require("../../firebase-private-key.js");
+var ServiceAccount = require("../firebase-private-key.js");
 var admin = require("firebase-admin");
 
 admin.initializeApp({
