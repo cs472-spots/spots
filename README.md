@@ -14,6 +14,8 @@ Clone the project with
 git clone https://git.heroku.com/unlv-spots.git
 ```
 
+Place a `.env` file containing all the credentials for firebase in `server/.env`.
+
 ### Server
 If you're developing on the server, first change directory to the server
 directory and run `npm install`. Start the server locally by runnning `npm start`.
