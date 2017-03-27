@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.js"></script>
+     <script src="./require.js"></script>
+ 
+    <script src="./regpermit.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyCFMmCzx6986u3_F5_b8r7_JCVGUPOb11A",
+      authDomain: "spots-cba38.firebaseapp.com",
+      databaseURL: "https://spots-cba38.firebaseio.com",
+      storageBucket: "spots-cba38.appspot.com",
+      messagingSenderId: "1023247207542"
+      };
+      firebase.initializeApp(config);
+      
+    </script>
+
+  </head>
+  <body>
+
+
+  <form accept-charset=utf-8>
+    <div class="form-group">
+      <label for="js-nshe">NSHE:</label> 
+      <input type="number" placeholder="nshe_num">
+    </div>
+    <button type="submit" class="submit">Submit</button>
+  </form>
+  
+
+</body>
+</html>
+
+
+    
