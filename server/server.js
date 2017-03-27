@@ -12,14 +12,16 @@ app.get('/', function(request, response) {
   console.log("responded to client")
 });
 
-io.on('connection', (socket) => {
-  //Reply to application after receiving hello message
-  socket.on('hello', (msg)=> {
-      console.log("Message received: " + msg);
+io.on('connection',(socket)=>{
+  console.log('Client connected -  ' + socket.id)
+  //Receive messages from admin
+  socket.on('Admin', (data)=> {
+      //var content = fs.readFileSync(data,'utf8');
+      console.log("Message received: " + data);
       socket.emit('reply', "hello from the server side");
   });
-  console.log("Client connected");
 });
+
 
 server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

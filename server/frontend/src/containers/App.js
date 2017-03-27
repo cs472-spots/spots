@@ -10,13 +10,17 @@ class App extends Component {
     this.sendMessage = this.sendMessage.bind(this);
   }
 
-        sendMessage() {
-          this.socket.emit('hello', 'Hello from application');
-          console.log('Sending a message to the server');
-          this.socket.on('reply', (message)=>{
-             console.log('Received the following messge from server: ' + message);
-          });
-        }
+  sendMessage() {
+    var data = {
+      first: "Alexies",
+      last: "Fabian"
+    }
+    this.socket.emit('Admin', data);
+    console.log('Sending a message to the server');
+    this.socket.on('reply', (message)=>{
+      console.log('Received the following message from server: ' + message);
+    });
+  }
 
 
   render() {
