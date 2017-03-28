@@ -10,7 +10,7 @@ if(process.env.BUILD == 'development') {
 }
 console.log("Using SPOTS_API_KEY = %s", SPOTS_API_KEY)
 
-router.post('/update/:key/:lotID/:spotID/:vacancy/:cardID', (req, res, next) => {
+router.post('/update/:key/:lotID/:spotID/:vacancy/:cardID?', (req, res, next) => {
   console.log(req.params);
   key = req.params.key;
   if(key != SPOTS_API_KEY) {
