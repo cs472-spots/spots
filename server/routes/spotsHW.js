@@ -18,7 +18,11 @@ router.post('/update/:key/:lotID/:spotID/:vacancy/:cardID', (req, res, next) => 
     return;
   }
 
-  res.send({authorized: true});
+  if(req.params.cardID == '123456789') {
+    res.send({authorized: true});
+  } else {
+    res.send({authorized: false});
+  }
 });
 
 module.exports = router;
