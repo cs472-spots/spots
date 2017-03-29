@@ -4,9 +4,9 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
 
-//var database = require("./src/database");
+var database = require("./src/database");
 
-//var userAccountsRef = database.ref("UserAccounts");
+var userAccountsRef = database.ref("UserAccounts");
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('frontend/build'));
