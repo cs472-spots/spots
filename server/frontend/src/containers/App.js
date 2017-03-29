@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.socket = SocketIOClient('http://localhost:3000');
+    this.socket = SocketIOClient(location.origin);
     this.keyPressEvent = this.keyPressEvent.bind(this);
   }
 
