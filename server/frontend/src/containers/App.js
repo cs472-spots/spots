@@ -46,6 +46,8 @@ class App extends Component {
   registerUser(){
     var data ={
       client: "Admin",
+      username: "alex",
+      password: "abcdefg",
       userID: 88888888,
       firstName: "New",
       lastName: "Name",

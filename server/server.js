@@ -36,14 +36,14 @@ io.on('connection', (socket) => {
         console.log("Received the following data from admin: \n");
         console.log(data);
 
-        registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        registerUser(data.username, data.password, data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
         break;
       case 'Mobile':
         //Receive JSON Object
         console.log("Received the following data from mobile: \n");
         console.log(data);
 
-        registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        registerUser(data.username, data.password, data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
         break;
     }
   });
@@ -66,9 +66,25 @@ server.listen(app.get('port'), function() {
 //Registers User to database
 //Paramters: (int, string, string, string, int, boolean, boolean, string?, permitType,
 //  string?, string?, string?, string?)
-function registerUser(userId, first, last, email, phone, gotPermit, expired, expDate,
+function registerUser(username, password, userId, first, last, email, phone, gotPermit, expired, expDate,
   permittype, make, model, color, plate){
-  var userIDRef = database.ref('UserAccounts/' + userId);
+  var userIDRef = database.ref('UserAccounts/' + username);
+  console.log('Password passed to registerUser() is: ' + password);
+  //Hash password for security
+  var passwd = hashFunction(password);
+
+  database.ref('UserAccounts/' + userId + '/LoginCredentials').set({
+    Username: username,
+    Password: passwd
+  });
+
+  //Create separate child in database for login credentials
+  //Easier to search and authenticate matching passwords
+  var login = database.ref('UserLogin/' + userId);
+  login.set({
+    Password: passwd
+  });
+
   userIDRef.set({
     First_Name: first,
     Last_Name: last,
@@ -105,4 +121,30 @@ function registerUser(userId, first, last, email, phone, gotPermit, expired, exp
       Plate_Number: null
     });
   }
+}
+
+//Creates hash for user password
+//Paramters: (string)
+function hashFunction(password){
+  console.log('password is: ' + password + '\n');
+  var hash = "";
+  var len = password.length;
+  var shift = 3;
+  var x;
+/*
+  //Caesar cipher for now
+  for(var i=0; i<len; i++){
+    x = password.charCodeAt(i);
+		if (x >= 65 && x <=  90){
+      hash += String.fromCharCode((x - 65 + shift) % 26 + 65);
+    }
+    else if (x >= 97 && x <= 122){
+      hash += String.fromCharCode((x - 97 + shift) % 26 + 97);
+    }
+    else
+      hash += text.charAt(i);
+  }*/
+  hash = "hashhhh";
+
+  return hash;
 }
