@@ -45,13 +45,15 @@ class App extends Component {
 
   registerUser(){
     var data ={
-      client: "admin",
+      client: "Admin",
       userID: 88888888,
       firstName: "New",
       lastName: "Name",
       email: "newname@gmail.com",
       phone: 3874635235,
       permit: false
+
+      //if(permit==true){add data for permit and vehicle}
     };
 
     this.socket.emit('client', data);

@@ -26,20 +26,33 @@ app.get('/', function(request, response) {
 });
 
 io.on('connection', (socket) => {
+  console.log("Client connected - " + socket.id);
+
+  socket.on('client', (data) => {
+    //clientType = data.client;
+    switch(data.client){
+      case 'Admin':
+        //Receive JSON Object
+        console.log("Received the following data from admin: \n");
+        console.log(data);
+
+        registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        break;
+      case 'Mobile':
+        //Receive JSON Object
+        console.log("Received the following data from mobile: \n");
+        console.log(data);
+
+        registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        break;
+    }
+  });
+
   //Reply to application after receiving hello message
   socket.on('hello', (msg)=> {
       console.log("Message received: " + msg);
       socket.emit('reply', "hello from the server side");
   });
-
-  socket.on('client', (data) => {
-    //Receive JSON Object
-    console.log("Received the following data from admin: \n");
-    console.log(data);
-
-    registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
-  });
-  console.log("Client connected");
 });
 
 server.listen(app.get('port'), function() {
