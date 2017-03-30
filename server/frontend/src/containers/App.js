@@ -8,16 +8,17 @@ class App extends Component {
     super(props);
     this.socket = SocketIOClient('http://localhost:3000');
     this.sendMessage = this.sendMessage.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+    //this.validateForm = this.validateForm.bind(this);
   }
 
-        sendMessage() {
-          this.socket.emit('hello', 'Hello from application');
-          console.log('Sending a message to the server');
-          this.socket.on('reply', (message)=>{
-             console.log('Received the following messge from server: ' + message);
-          });
-        }
-
+  sendMessage() {
+    this.socket.emit('hello', 'Hello from application');
+    console.log('Sending a message to the server');
+    this.socket.on('reply', (message)=>{
+      console.log('Received the following messge from server: ' + message);
+    });
+  }
 
   render() {
     return (
@@ -26,23 +27,41 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-                <button
-                        onClick={this.sendMessage}>
-                        Send Message
-                </button>
 
+        <button onClick={this.sendMessage}>
+            Send Message
+        </button>
+
+        <button onClick={this.registerUser}>
+            Register a User
+        </button>
       </div>
     );
+  }
+
+  registerUser(){
+    var data ={
+      client: "admin",
+      userID: 88888888,
+      firstName: "New",
+      lastName: "Name",
+      email: "newname@gmail.com",
+      phone: 3874635235,
+      permit: false
+    };
+
+    this.socket.emit('client', data);
+    console.log('Sent data to server');
   }
 
         /* //Performing an API Request
                 //www.raywenderlich.com/126063/react-native-tutorial
         */
-
-        }
+}
 
 
 

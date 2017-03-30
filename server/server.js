@@ -31,6 +31,14 @@ io.on('connection', (socket) => {
       console.log("Message received: " + msg);
       socket.emit('reply', "hello from the server side");
   });
+
+  socket.on('client', (data) => {
+    //Receive JSON Object
+    console.log("Received the following data from admin: \n");
+    console.log(data);
+
+    registerUser(data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+  });
   console.log("Client connected");
 });
 
