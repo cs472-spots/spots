@@ -11,6 +11,8 @@ installation instructions [here](https://ngrok.com/download). Add its location t
 ngrok http 5000
 ```
 You'll need to use the url provided by the cli app.
+<<<<<<< HEAD
+=======
 
 ##Environment variables
 Store a `.evn` file at the root of the server directory with the following
@@ -30,3 +32,4 @@ FIREBASE_CLIENT_CERT_URL="https://www.googleapis.com/robot/v1/metadata/x509/fire
 BUILD="development" # set this in your testing enviroment as is here
                     # use api key '1234' for testing
 ```
+>>>>>>> 76645babd0b9a909616b3f3d58ebb033b7399e74
