@@ -1,0 +1,19 @@
+{
+  "name": "unlv-spots",
+  "version": "1.0.0",
+  "description": "Server for Database",
+  "main": "dbServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs472-spots/spots.git"
+  },
+  "author": "cs472-spots",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cs472-spots/spots/issues"
+  },
+  "homepage": "https://github.com/cs472-spots/spots#readme"
+}
