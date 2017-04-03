@@ -1,35 +1,31 @@
 //src/containers/Login/index.js
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 import { Checkbox,
          FormControl,
-         Form, 
+         Form,
          FormGroup,
          Col,
          ControlLabel,
-         Row,
          Grid,
          Button,
-         Panel,
-         Jumbotron,
-         ValidatedInput
+         Panel
        } from 'react-bootstrap';
-        
 
 import './Login.css';
 
 class Login extends Component {
-  
+
   render() {
     const { className, ...props } = this.props;
-    
+
     return (
       <div className={classnames('About', className)} {...props}>
       <div className="Login-Header">
         <center><h1>Welcome to SPOTS!</h1></center>
       </div>
-        
+
       <div className="Login-Content">
       <Grid>
         <Panel>

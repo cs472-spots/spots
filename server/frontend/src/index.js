@@ -2,10 +2,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { browserHistory, hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
+// eslint-disable-next-line
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
-
-import App from './containers/App';
 
 import Routes from './routes/index.js';
 

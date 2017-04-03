@@ -1,10 +1,10 @@
 // src/containers/Register/index.js
 
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 
 class Register extends Component {
-	render () { 
+	render () {
 		const { className, ...props } = this.props;
 		
 		return (
