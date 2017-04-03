@@ -29,21 +29,21 @@ io.on('connection', (socket) => {
   console.log("Client connected - " + socket.id);
 
   socket.on('client', (data) => {
-    //clientType = data.client;
+    var userProfile = data;
     switch(data.client){
       case 'Admin':
         //Receive JSON Object
         console.log("Received the following data from admin: \n");
         console.log(data);
 
-        registerUser(data.username, data.password, data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        registerUser(userProfile);
         break;
       case 'Mobile':
         //Receive JSON Object
         console.log("Received the following data from mobile: \n");
         console.log(data);
 
-        registerUser(data.username, data.password, data.userID, data.firstName, data.lastName, data.email, data.phone, data.permit);
+        registerUser(userProfile);
         break;
     }
   });
@@ -66,55 +66,66 @@ server.listen(app.get('port'), function() {
 //Registers User to database
 //Paramters: (int, string, string, string, int, boolean, boolean, string?, permitType,
 //  string?, string?, string?, string?)
-function registerUser(username, password, userId, first, last, email, phone, gotPermit, expired, expDate,
-  permittype, make, model, color, plate){
-  var userIDRef = database.ref('UserAccounts/' + username);
-  console.log('Password passed to registerUser() is: ' + password);
-  //Hash password for security
-  var passwd = hashFunction(password);
+function registerUser(userProfile){
+  var userIDRef = database.ref('UserAccounts/' + userProfile.userID);
 
-  database.ref('UserAccounts/' + userId + '/LoginCredentials').set({
-    Username: username,
+  //console.log('Password passed to registerUser() is: ' + userProfile.password);
+  //Hash password for security
+  var passwd = hashFunction(userProfile.password);
+  console.log('Hash successfully returned: ' + passwd);
+
+  database.ref('UserAccounts/' + userProfile.userID + '/LoginCredentials').set({
+    Username: userProfile.username,
     Password: passwd
   });
-
   //Create separate child in database for login credentials
   //Easier to search and authenticate matching passwords
-  var login = database.ref('UserLogin/' + userId);
+  var login = database.ref('UserLogin/' + userProfile.userID);
   login.set({
     Password: passwd
   });
 
   userIDRef.set({
-    First_Name: first,
-    Last_Name: last,
-    Email: email,
-    Phone: phone,
-    Permit: gotPermit
+    firstName: userProfile.firstName,
+    lastName: userProfile.lastName,
+    userEmail: userProfile.email,
+    phone: userProfile.phone,
+    permit: userProfile.gotPermit
   });
 
-  if(gotPermit){
-    database.ref('UserAccounts/' + userId + '/Permit').set({
-      isExpired: expired,
-      ExpDate: expDate,
-      Permit_Type: permittype
+  if(userProfile.gotPermit===true){
+    database.ref('UserAccounts/' + userProfile.userID + '/permit').set({
+      purchaseDate: userProfile.purchaseDate,
+      expDate: userProfile.expDate,
+      type: userProfile.permitType
     });
 
-    database.ref('UserAccounts/' + userId + '/Vehicle').set({
-      Make: make,
-      Model: model,
-      Color: color,
-      Plate_Number: plate
-    });
+    console.log('Number of vehicles: ' + userProfile.vehicleInt);
+    if(userProfile.vehicleInt<=2){
+      database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v1').set({
+        make: userProfile.v1_make,
+        model: userProfile.v1_model,
+        color: userProfile.v1_color,
+        licensePlate: userProfile.v1_plate
+      });
+      if(userProfile.vehicleInt===2){
+        database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v2').set({
+          make: userProfile.v2_make,
+          model: userProfile.v2_model,
+          color: userProfile.v2_color,
+          licensePlate: userProfile.v2_plate
+        });
+      }
+    }
   }
   else{
-    database.ref('UserAccounts/' + userId + '/Permit').set({
-      isExpired: null,
-      ExpDate: null,
-      Permit_Type: None
+    database.ref('UserAccounts/' + userProfile.userID + '/permit').set({
+      purchaseDate: null,
+      expDate: null,
+      type: None
     });
 
-    database.ref('UserAccounts/' + userId + '/Vehicle').set({
+    database.ref('UserAccounts/' + userProfile.userID + '/Vehicle').set({
       Make: null,
       Model: null,
       Color: null,
@@ -131,7 +142,7 @@ function hashFunction(password){
   var len = password.length;
   var shift = 3;
   var x;
-/*
+
   //Caesar cipher for now
   for(var i=0; i<len; i++){
     x = password.charCodeAt(i);
@@ -143,8 +154,8 @@ function hashFunction(password){
     }
     else
       hash += text.charAt(i);
-  }*/
-  hash = "hashhhh";
+  }
 
+  console.log('Returning hash now');
   return hash;
 }
