@@ -36,7 +36,11 @@ io.on('connection', (socket) => {
         console.log("Received the following data from admin: \n");
         console.log(data);
 
-        registerUser(userProfile);
+        if(data.flag==="delete")
+          deleteUser(userProfile.userID);
+
+        if(data.flag==="register")
+          registerUser(userProfile);
         break;
       case 'Mobile':
         //Receive JSON Object
@@ -158,4 +162,15 @@ function hashFunction(password){
 
   console.log('Returning hash now');
   return hash;
+}
+
+//Deletes a user
+//Parameters(int)
+function deleteUser(userID){
+  console.log('Deleting the following user: ' + userID);
+  var user = database.ref('UserAccounts/' + userID);
+  user.remove();
+
+ var userCred = database.ref('UserLogin/' + userID);
+  userCred.remove();
 }

@@ -9,7 +9,7 @@ class App extends Component {
     this.socket = SocketIOClient('http://localhost:3000');
     this.sendMessage = this.sendMessage.bind(this);
     this.registerUser = this.registerUser.bind(this);
-    //this.validateForm = this.validateForm.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
   }
 
   sendMessage() {
@@ -39,6 +39,10 @@ class App extends Component {
         <button onClick={this.registerUser}>
             Register a User
         </button>
+
+        <button onClick={this.deleteUser}>
+            Delete a User
+        </button>
       </div>
     );
   }
@@ -48,6 +52,7 @@ class App extends Component {
 
     var data ={
       client: "Admin",
+      flag: "register",
       username: "alex",
       password: "abcdefg",
       userID: 68888888,
@@ -80,6 +85,17 @@ class App extends Component {
 
     this.socket.emit('client', data);
     console.log('Sent data to server');
+  }
+
+  deleteUser() {
+    var data ={
+      client: "Admin",
+      flag: "delete",
+      userID: 68888888,
+    };
+
+    this.socket.emit('client', data);
+    console.log('Telling server to delete user ' + data.userID);
   }
 
         /* //Performing an API Request
