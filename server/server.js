@@ -53,7 +53,18 @@ io.on('connection', (socket) => {
         console.log("Received the following data from mobile: \n");
         console.log(data);
 
-        registerUser(userProfile);
+        switch(data.flag){
+          case 'delete':
+            deleteUser(userProfile.userID);
+            break;
+          case 'register':
+            registerUser(userProfile);
+            break;
+          case 'viewUser':
+            viewUser(userProfile.userID);
+            break;
+        }
+        
         break;
     }
   });
