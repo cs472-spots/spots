@@ -12,7 +12,7 @@ var None = permitType.get(1);
 var Student = permitType.get(2);
 var Faculty = permitType.get(3);
 
-var userAccountsRef = database.ref("UserAccounts");
+var userAccountsRef = database.ref('/UserAccounts');
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('frontend/build'));
@@ -36,11 +36,17 @@ io.on('connection', (socket) => {
         console.log("Received the following data from admin: \n");
         console.log(data);
 
-        if(data.flag==="delete")
-          deleteUser(userProfile.userID);
-
-        if(data.flag==="register")
-          registerUser(userProfile);
+        switch(data.flag){
+          case 'delete':
+            deleteUser(userProfile.userID);
+            break;
+          case 'register':
+            registerUser(userProfile);
+            break;
+          case 'viewUser':
+            viewUser(userProfile.userID);
+            break;
+        }
         break;
       case 'Mobile':
         //Receive JSON Object
@@ -173,4 +179,51 @@ function deleteUser(userID){
 
  var userCred = database.ref('UserLogin/' + userID);
   userCred.remove();
+}
+
+//Views a user's account
+//Parameters(int)
+function viewUser(userID){
+  console.log('Viewing the following user: ' + userID);
+
+  database.ref('UserAccounts/' + userID).once('value', function(snapshot){
+    console.log(snapshot.val());
+    if(snapshot.val()===null)
+      io.emit('userInfo', 'Error. User does not exist.');
+    else{
+      var userInfo = {
+        //username: snapshot.val().username,
+        userID: userID,
+        firstName: snapshot.val().firstName,
+        lastName: snapshot.val().lastName,
+        email: snapshot.val().userEmail,
+        phone: snapshot.val().phone
+      };
+
+      if(snapshot.val().permit != null){
+        userInfo.permitType = snapshot.val().permit.type;
+        userInfo.purchaseDate = snapshot.val().permit.purchaseDate;
+        userInfo.expDate = snapshot.val().expDate;
+
+        if(snapshot.val().vehicles !=null){
+          userInfo.v1_make = snapshot.val().vehicles.v1.make;
+          userInfo.v1_model = snapshot.val().vehicles.v1.model;
+          userInfo.v1_color = snapshot.val().vehicles.v1.color;
+          userInfo.v1_plate = snapshot.val().vehicles.v1.licensePlate;
+
+          if(snapshot.val().vehicles.v2 !=null){
+            userInfo.v2_make = snapshot.val().vehicles.v2.make;
+            userInfo.v2_model = snapshot.val().vehicles.v2.model;
+            userInfo.v2_color = snapshot.val().vehicles.v2.color;
+            userInfo.v2_plate = snapshot.val().vehicles.v2.licensePlate;
+          }
+        }
+      }
+    }
+
+    console.log(userInfo);
+    io.emit('userInfo', userInfo);
+  });
+
+
 }

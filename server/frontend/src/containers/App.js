@@ -10,14 +10,7 @@ class App extends Component {
     this.sendMessage = this.sendMessage.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-  }
-
-  sendMessage() {
-    this.socket.emit('hello', 'Hello from application');
-    console.log('Sending a message to the server');
-    this.socket.on('reply', (message)=>{
-      console.log('Received the following messge from server: ' + message);
-    });
+    this.viewUser = this.viewUser.bind(this);
   }
 
   render() {
@@ -43,12 +36,26 @@ class App extends Component {
         <button onClick={this.deleteUser}>
             Delete a User
         </button>
+
+        <button onClick={this.viewUser}>
+            View a User
+        </button>
       </div>
     );
   }
 
+
+//Functions
+  sendMessage() {
+    this.socket.emit('hello', 'Hello from application');
+    console.log('Sending a message to the server');
+    this.socket.on('reply', (message)=>{
+      console.log('Received the following messge from server: ' + message);
+    });
+  }
+
   registerUser(){
-    var vInt = 1;
+    var vInt = 2;
 
     var data ={
       client: "Admin",
@@ -80,7 +87,7 @@ class App extends Component {
       data.v2_make = null;
       data.v2_model = null;
       data.v2_color = null;
-      data.v2_licensePlate = null;
+      data.v2_plate = null;
     }
 
     this.socket.emit('client', data);
@@ -91,11 +98,26 @@ class App extends Component {
     var data ={
       client: "Admin",
       flag: "delete",
-      userID: 68888888,
+      userID: 68888888
     };
 
     this.socket.emit('client', data);
     console.log('Telling server to delete user ' + data.userID);
+  }
+
+  viewUser(){
+    console.log('Requested tor view a user');
+    var data = {
+      client: "Admin",
+      flag: "viewUser",
+      userID: 68888888
+    }
+
+    this.socket.emit('client', data);
+    this.socket.on('userInfo', (info)=>{
+      console.log('Listening for info');
+      console.log(info);
+    });
   }
 
         /* //Performing an API Request
