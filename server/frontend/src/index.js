@@ -6,9 +6,7 @@ import { browserHistory } from 'react-router';
 // eslint-disable-next-line
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 
-import Routes from './routes/index.js';
-
-import './index.css';
+import Routes from './routes/Routes.js';
 
 //Renders the components passed by 
 ReactDOM.render(

@@ -1,9 +1,9 @@
 //src/containers/Login/index.js
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import logo from './../../assets/logo.png';
 
-import { Checkbox,
-         FormControl,
+import { FormControl,
          Form,
          FormGroup,
          Col,
@@ -21,11 +21,7 @@ class Login extends Component {
     const { className, ...props } = this.props;
 
     return (
-      <div className={classnames('About', className)} {...props}>
-      <div className="Login-Header">
-        <center><h1>Welcome to SPOTS!</h1></center>
-      </div>
-
+      <div className={classnames('Login', className)} {...props}>
       <div className="Login-Content">
       <Grid>
         <Panel>
@@ -46,12 +42,6 @@ class Login extends Component {
               </Col>
               <Col sm={10}>
                 <FormControl type="password" placeholder="Password" />
-              </Col>
-            </FormGroup>
-
-            <FormGroup>
-              <Col smOffset={2} sm={10}>
-                <Checkbox>Remember me</Checkbox>
               </Col>
             </FormGroup>
 
