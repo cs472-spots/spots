@@ -1,12 +1,14 @@
+// src/containers/App
 import React, { Component } from 'react';
 import SocketIOClient from 'socket.io-client';
-import logo from '../assets/logo.svg';
+import logo from '../../assets/logo.svg';
 import './App.css';
 
 class App extends Component {
+
   constructor(props) {
     super(props);
-    this.socket = SocketIOClient('http://localhost:3000');
+    this.socket = SocketIOClient(location.origin);
     this.sendMessage = this.sendMessage.bind(this);
     this.registerUser = this.registerUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
@@ -26,7 +28,7 @@ class App extends Component {
         </p>
 
         <button onClick={this.sendMessage}>
-            Send Message
+            Send Messages
         </button>
 
         <button onClick={this.registerUser}>
@@ -124,7 +126,5 @@ class App extends Component {
                 //www.raywenderlich.com/126063/react-native-tutorial
         */
 }
-
-
 
 export default App;

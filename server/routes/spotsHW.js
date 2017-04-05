@@ -2,12 +2,7 @@ var express = require('express');
 var uuid = require('uuid');
 var router = express.Router();
 
-var SPOTS_API_KEY;
-if(process.env.BUILD == 'development') {
-  SPOTS_API_KEY = '1234';
-} else {
-  SPOTS_API_KEY = uuid();
-}
+var SPOTS_API_KEY = process.env.SPOTS_API_KEY;
 console.log("Using SPOTS_API_KEY = %s", SPOTS_API_KEY)
 
 router.post('/update/:key/:lotID/:spotID/:vacancy/:cardID?', (req, res, next) => {
