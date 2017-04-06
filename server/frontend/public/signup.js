@@ -15,7 +15,7 @@ createform.appendChild(line);
 var linebreak = document.createElement('br');
 createform.appendChild(linebreak);
 
-//first name 
+//first name
 var fname = document.createElement('label'); // Create Label for Name Field
 fname.innerHTML = "First Name : "; // Set Field Labels
 createform.appendChild(fname);
