@@ -1,6 +1,8 @@
 // src/containers/App
 import React, { Component } from 'react';
 import SocketIOClient from 'socket.io-client';
+import { connect } from 'nectarine';
+
 import logo from '../../assets/logo.svg';
 import './App.css';
 
@@ -84,4 +86,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: App,
+  mapProps
+});
