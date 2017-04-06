@@ -117,15 +117,6 @@ createform.appendChild(modelinput);
 var linebreak = document.createElement('br');
 createform.appendChild(linebreak);
 
-//firebase section
-var admin = require("firebase-admin");
-var serviceAccount = require("./fb_credentials.json");
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://spots-cba38.firebaseio.com/"
-});
-
 
 
 /*SAMPLE CODE by https://www.formget.com/javascript-contact-form/
