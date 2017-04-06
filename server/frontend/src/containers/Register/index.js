@@ -1,6 +1,7 @@
 // src/containers/Register/index.js
 
 import React, { Component } from 'react';
+import { connect } from 'nectarine';
 import classnames from 'classnames';
 
 class Register extends Component {
@@ -15,4 +16,11 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: Register,
+  mapProps
+});
