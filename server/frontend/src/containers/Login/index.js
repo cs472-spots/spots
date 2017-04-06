@@ -1,6 +1,7 @@
 //src/containers/Login/index.js
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import { connect } from 'nectarine';
 
 import { Checkbox,
          FormControl,
@@ -71,4 +72,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: Login,
+  mapProps
+});
