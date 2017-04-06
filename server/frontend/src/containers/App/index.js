@@ -28,7 +28,7 @@ class App extends Component {
         </p>
 
         <button onClick={this.sendMessage}>
-            Send Messages
+            Send Message
         </button>
 
         <button onClick={this.registerUser}>
@@ -57,11 +57,10 @@ class App extends Component {
   }
 
   registerUser(){
-    var vInt = 2;
+    var vInt = 1;
 
     var data ={
       client: "Admin",
-      flag: "register",
       username: "alex",
       password: "abcdefg",
       userID: 68888888,
@@ -89,7 +88,7 @@ class App extends Component {
       data.v2_make = null;
       data.v2_model = null;
       data.v2_color = null;
-      data.v2_plate = null;
+      data.v2_licensePlate = null;
     }
 
     this.socket.emit('client', data);
