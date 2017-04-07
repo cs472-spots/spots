@@ -4,16 +4,15 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { Provider } from 'nectarine';
 // eslint-disable-next-line
+
+
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
-
 import Store from './store/Store.js';
-import Routes from './routes/Routes.js';
-
+import Routes from './routes/index.js';
 import './index.css';
-//Renders the components passed by 
+
+//Renders the components passed by
 ReactDOM.render(
-  <Provider store={store}>
-    <Routes history={browserHistory} />
-  </Provider>
+  <Routes history={browserHistory} />,
   document.getElementById('root')
 );

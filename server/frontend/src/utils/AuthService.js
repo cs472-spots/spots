@@ -1,5 +1,3 @@
-// src/utils/AuthService.js
-
 import Auth0Lock from 'auth0-lock'
 import { browserHistory } from 'react-router'
 
