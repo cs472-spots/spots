@@ -1,7 +1,17 @@
 // Login Screen JS code
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Image, 
+    Text, 
+    TextInput, 
+    TouchableOpacity, 
+    TouchableWithoutFeedback, 
+    Keyboard, 
+    KeyboardAvoidingView } from 'react-native';
 import Main from './Main';
 
 export default class Login extends Component {
@@ -11,7 +21,7 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            showError: false
+            showError: false,
         }
     }
 
@@ -27,6 +37,12 @@ export default class Login extends Component {
             })
             Keyboard.dismiss();
         }
+    }
+
+    navRegister() {
+        this.props.navigator.push({
+            page: 'Register'
+        });
     }
 
     render() {
@@ -63,6 +79,12 @@ export default class Login extends Component {
                             <Text style={styles.buttonText}>LOGIN</Text>
                         </View>
                     </TouchableOpacity>
+                    <View style={{paddingTop: 50, flexDirection: 'row'}}>
+                        <Text>No account yet? </Text>
+                        <TouchableOpacity onPress={this.navRegister.bind(this)}>
+                            <Text style={styles.register}>Register</Text>
+                        </TouchableOpacity>
+                    </View>
                 </KeyboardAvoidingView>
             </View>
         );
@@ -103,6 +125,9 @@ const styles = StyleSheet.create({
     },
     error: {
         color: 'red'
+    },
+    register: {
+        color: '#0000ee'
     }
 });
 

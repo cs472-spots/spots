@@ -1,7 +1,12 @@
 // CheckIn Screen JS code
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image, Text } from 'react-native';
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Image, 
+    Text } from 'react-native';
 import BottomNav from './BottomNav';
 
 export default class CheckIn extends Component {

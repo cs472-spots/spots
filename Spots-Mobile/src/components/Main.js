@@ -1,9 +1,17 @@
 // Main Screen JS code
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image, Text, Button , TouchableOpacity} from 'react-native';
+import { 
+    AppRegistry,
+    StyleSheet, 
+    View, 
+    Image, 
+    Text, 
+    Button, 
+    TouchableOpacity } from 'react-native';
 import Login from './Login';
 import CheckIn from './CheckIn';
+import Register from './Register';
 import BottomNav from './BottomNav';
 
 export default class Main extends Component {
@@ -11,8 +19,7 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: this.props.username,
-            password: this.props.password
+            firstname: this.props.firstname
         }
     }   
 
@@ -28,7 +35,7 @@ export default class Main extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.h1}>
-                        Welcome, {this.state.username}
+                        Welcome, {this.state.firstname}
                     </Text>
                 </View>
                 <View style={styles.mainNav}>
@@ -54,7 +61,7 @@ export default class Main extends Component {
                             style={styles.icon}
                             source={require('./images/registerIcon.png')}
                             />
-                            <Text style={{textAlign: 'center'}}>Register</Text>
+                            <Text style={{textAlign: 'center'}}>Permit</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -1,5 +1,13 @@
+// Bottom Navigation JS code
+
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native';
+import { 
+    AppRegistry, 
+    StyleSheet, 
+    View, 
+    Image, 
+    Text, 
+    TouchableOpacity } from 'react-native';
 
 export default class Main extends Component {
 
