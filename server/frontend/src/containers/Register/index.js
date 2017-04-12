@@ -1,32 +1,4 @@
-// src/containers/Register/index.js
-
 import React, { Component } from 'react';
-//import classnames from 'classnames';
-<head>
-  <script src="http://fb.me/react-0.10.0.min.js"></script>
-  <script src="http://fb.me/JSXTransformer-0.10.0.js"></script>
-</head>
-
-
-/*
-class Register extends Component {
-  render () {
-    const { className, ...props } = this.props;
-
-    return (
-      <div className={classnames('Register', className)} {...props}>
-            <h2>Hello from Register!</h2>
-	    </div>
-    )
-     
-    }
-   
-}
-*/
-//for the database info
-
-
-
 
 //registration form
 class Register extends Component {
@@ -35,17 +7,17 @@ class Register extends Component {
 	this.state = {
 	    fname: '',
 	    lname: '',
-	    NSHE:0,
+	    NSHE:'',
 	    email: '',
 	    pnum:0,
 	    vColor:'',
 	    vLic:'',
 	    vMake:'',
 	    vModel:'',
-	    value: 'student'
+	    permitType: 'student'
 	};
 
-	this.handleChange = this.handleChange.bind(this);
+	this.handleChange = this.handleChange.bind(this); 
 	this.handleSubmit = this.handleSubmit.bind(this);
 	this.handlechange2 = this.handleChange2.bind(this);
     }
@@ -60,9 +32,7 @@ class Register extends Component {
 	    
 	});
     }
-    handleChange2(event){
-	this.setState({value: event.target.value});
-    }
+    
 
     handleSubmit(event) {
 	alert('A form was completed. ' + '\n' +
@@ -75,13 +45,13 @@ class Register extends Component {
 	     );
 	event.preventDefault();
     }
-    //firebase function
     
 
 
 
     
     //EXECUTION TIME!
+    
     render() {
 	return (
 	      
@@ -112,7 +82,7 @@ class Register extends Component {
 		NSHE:
 		<input 
 	          name = "NSHE"
-	          type = "number"
+	          type = "text"
 	          value={this.state.NSHE}
 	          onChange={this.handleChange} />
 		</label>
@@ -127,7 +97,7 @@ class Register extends Component {
 		</label>
 		<br></br>
 		<label> 
-		Phone Number (exclude "-" and include area code):
+		Phone Number (i.e. 7022589201):
 		<input 
 	          name= "pnum"
 	          type = "text"
@@ -138,7 +108,7 @@ class Register extends Component {
 		<label><h3>Vehicle Information</h3></label>
 		<br></br>
 		<label> 
-		Color:
+		Color (i.e. Blue):
 		<input 
 	          name= "vColor"
 	          type = "text"
@@ -156,7 +126,7 @@ class Register extends Component {
 		</label>
 		<br></br>
 		<label> 
-		Car Maker:
+		Car Maker (i.e. Ford):
 		<input 
 	          name= "vMake"
 	          type = "text"
@@ -165,7 +135,7 @@ class Register extends Component {
 		</label>
 		<br></br>
 		<label> 
-		Model:
+		Model (i.e. Fusion):
 		<input 
 	          name= "vModel"
 	          type = "text"
@@ -176,7 +146,10 @@ class Register extends Component {
 		
 		<label>
 		Permit Type:
-		<select value={this.state.value} onChange={this.handleChange2}>
+	        
+		<select
+	        name = "permitType"
+	        value={this.state.permitType} onChange={this.handleChange}>
 		<option value="student">Student</option>
 		<option value="staff">Staff</option>
 		<option value="guest">Guest</option>
