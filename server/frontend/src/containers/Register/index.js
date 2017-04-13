@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'nectarine';
+import classnames from 'classnames';
 
 //registration form
 class Register extends Component {
@@ -17,12 +19,9 @@ class Register extends Component {
 	    permitType: 'student'
 	};
 
-	this.handleChange = this.handleChange.bind(this); 
-	this.handleSubmit = this.handleSubmit.bind(this);
-	this.handlechange2 = this.handleChange2.bind(this);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
 	const target = event.target;
 	const value = target.value
 	const name = target.name;
@@ -34,7 +33,7 @@ class Register extends Component {
     }
     
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
 	alert('A form was completed. ' + '\n' +
 	      'Name: '+ this.state.fname +' '+this.state.lname+'\n'+
 	      'NSHE: ' + this.state.NSHE + '\n'+
@@ -162,5 +161,11 @@ class Register extends Component {
     }
 }
 
+const mapProps = (store) => {
+  return {}
+}
 
-export default Register;
+export default connect({
+  component: Register,
+  mapProps
+});
