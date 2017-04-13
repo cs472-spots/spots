@@ -26,12 +26,8 @@ class Register extends Component {
   const name = target.name;
   this.setState({
       [name]:value,
-     
-      
   });
     }
-    
-
     handleSubmit = (event) => {
   alert('A form was completed. \n' +
         'Name: '+ this.state.fname +' '+this.state.lname+'\n'+
@@ -43,33 +39,29 @@ class Register extends Component {
        );
   event.preventDefault();
     }
-    
 
 
 
-    
     //EXECUTION TIME!
-    
     render() {
   return (
-        
     <form onSubmit={this.handleSubmit}>
     <label><h2>Register Your Account</h2></label>
     <br></br>
     <label><h3>User Information</h3></label>
     <br></br>
-    <label> 
+    <label>
     First Name:
-    <input 
+    <input
             name="fname"
             type="text"
             value={this.state.fname}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    <label> 
+    <label>
     Last Name:
-    <input 
+    <input
             name="lname"
             type="text"
             value={this.state.lname}
@@ -78,25 +70,25 @@ class Register extends Component {
     <br></br>
     <label>
     NSHE:
-    <input 
+    <input
             name="NSHE"
             type="text"
             value={this.state.NSHE}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    <label> 
+    <label>
     Email:
-    <input 
+    <input
             name="email"
             type="text"
             value={this.state.email}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    <label> 
+    <label>
     Phone Number (i.e. 7022589201):
-    <input 
+    <input
             name="pnum"
             type="text"
             value={this.state.pnum}
@@ -105,46 +97,44 @@ class Register extends Component {
     <br></br>
     <label><h3>Vehicle Information</h3></label>
     <br></br>
-    <label> 
+    <label>
     Color (i.e. Blue):
-    <input 
+    <input
             name="vColor"
             type="text"
             value={this.state.vColor}
             onChange={this.handleChange} />
     </label>
     <br></br>
-                <label> 
+                <label>
     Car License:
-    <input 
+    <input
             name="vLic"
             type="text"
             value={this.state.vLic}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    <label> 
+    <label>
     Car Maker (i.e. Ford):
-    <input 
+    <input
             name="vMake"
             type="text"
             value={this.state.vMake}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    <label> 
+    <label>
     Model (i.e. Fusion):
-    <input 
+    <input
             name="vModel"
             type="text"
             value={this.state.vModel}
             onChange={this.handleChange} />
     </label>
     <br></br>
-    
     <label>
     Permit Type:
-          
     <select
           name="permitType"
           value={this.state.permitType} onChange={this.handleChange}>
