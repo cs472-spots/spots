@@ -3,13 +3,10 @@ import React, { Component } from 'react';
 import SocketIOClient from 'socket.io-client';
 import {  Navbar,
           Nav,
-          NavItem,
-          NavDropdown,
-          MenuItem
+          NavItem
         } from 'react-bootstrap';
 import { IndexLinkContainer } from 'react-router-bootstrap';
 
-import logo from '../../assets/logo.png';
 import './App.css';
 
 class App extends Component {

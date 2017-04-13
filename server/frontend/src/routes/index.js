@@ -1,10 +1,11 @@
 // src/routes/Routes.js
 import React from 'react';
 import { Router,
-  Route, IndexRedirect, Redirect } from 'react-router';
+         Route,
+         IndexRedirect } from 'react-router';
 
 import App from '../containers/App';
-import Error404 from '../containers/Error404'
+import Error404 from '../containers/Error404';
 import Home from '../containers/Home';
 import Login from '../containers/Login';
 import Register from '../containers/Register';

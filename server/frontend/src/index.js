@@ -1,7 +1,7 @@
 // src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 import { Provider } from 'nectarine';
 // eslint-disable-next-line
 
@@ -13,6 +13,6 @@ import './index.css';
 
 //Renders the components passed by
 ReactDOM.render(
-  <Routes history={browserHistory} />,
+  <Routes history={hashHistory} />,
   document.getElementById('root')
 );

@@ -4,18 +4,6 @@ import AuthService from '../../utils/AuthService';
 
 import logo from './../../assets/logo.png';
 
-import { FormControl,
-         Form,
-         FormGroup,
-         Col,
-         ControlLabel,
-         Grid,
-         Button,
-         Panel
-       } from 'react-bootstrap';
-
-import './Login.css';
-
 class Login extends Component {
   static propTypes = {
     location: T.object,
@@ -28,7 +16,7 @@ class Login extends Component {
     return (
       <div className="Login-Class">
         <div className="Login-Header">
-          <img src={logo} onClick={auth.login.bind(this)}/>
+          <img role="presentation" src={logo} onClick={auth.login.bind(this)}/>
         </div>
       </div>
     );
