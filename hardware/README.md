@@ -1,5 +1,5 @@
-#Spots Hardware
-##Instructions for using the SPOTS.ino file
+# Spots Hardware
+## Instructions for using the SPOTS.ino file
 Download the following libraries and include them in your arduino IDE
 * https://github.com/miguelbalboa/rfid
 * https://github.com/DaKaZ/esp8266-restclient
