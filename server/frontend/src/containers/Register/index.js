@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'nectarine';
-import classnames from 'classnames';
 
 //registration form
 class Register extends Component {
@@ -34,7 +33,7 @@ class Register extends Component {
     
 
     handleSubmit = (event) => {
-	alert('A form was completed. ' + '\n' +
+	alert('A form was completed. \n' +
 	      'Name: '+ this.state.fname +' '+this.state.lname+'\n'+
 	      'NSHE: ' + this.state.NSHE + '\n'+
 	      'Email: '+ this.state.email + '\n'+
@@ -62,8 +61,8 @@ class Register extends Component {
 		<label> 
 		First Name:
 		<input 
-	          name = "fname"
-	          type = "text"
+	          name="fname"
+	          type="text"
 	          value={this.state.fname}
 	          onChange={this.handleChange} />
 		</label>
@@ -71,8 +70,8 @@ class Register extends Component {
 		<label> 
 		Last Name:
 		<input 
-	          name = "lname"
-	          type = "text"
+	          name="lname"
+	          type="text"
 	          value={this.state.lname}
 	          onChange={this.handleChange} />
 		</label>
@@ -80,8 +79,8 @@ class Register extends Component {
 		<label>
 		NSHE:
 		<input 
-	          name = "NSHE"
-	          type = "text"
+	          name="NSHE"
+	          type="text"
 	          value={this.state.NSHE}
 	          onChange={this.handleChange} />
 		</label>
@@ -89,8 +88,8 @@ class Register extends Component {
 		<label> 
 		Email:
 		<input 
-	          name = "email"
-	          type = "text"
+	          name="email"
+	          type="text"
 	          value={this.state.email}
 	          onChange={this.handleChange} />
 		</label>
@@ -98,8 +97,8 @@ class Register extends Component {
 		<label> 
 		Phone Number (i.e. 7022589201):
 		<input 
-	          name= "pnum"
-	          type = "text"
+	          name="pnum"
+	          type="text"
 	          value={this.state.pnum}
 	          onChange={this.handleChange} />
 		</label>
@@ -109,8 +108,8 @@ class Register extends Component {
 		<label> 
 		Color (i.e. Blue):
 		<input 
-	          name= "vColor"
-	          type = "text"
+	          name="vColor"
+	          type="text"
 	          value={this.state.vColor}
 	          onChange={this.handleChange} />
 		</label>
@@ -118,8 +117,8 @@ class Register extends Component {
                 <label> 
 		Car License:
 		<input 
-	          name= "vLic"
-	          type = "text"
+	          name="vLic"
+	          type="text"
 	          value={this.state.vLic}
 	          onChange={this.handleChange} />
 		</label>
@@ -127,8 +126,8 @@ class Register extends Component {
 		<label> 
 		Car Maker (i.e. Ford):
 		<input 
-	          name= "vMake"
-	          type = "text"
+	          name="vMake"
+	          type="text"
 	          value={this.state.vMake}
 	          onChange={this.handleChange} />
 		</label>
@@ -136,8 +135,8 @@ class Register extends Component {
 		<label> 
 		Model (i.e. Fusion):
 		<input 
-	          name= "vModel"
-	          type = "text"
+	          name="vModel"
+	          type="text"
 	          value={this.state.vModel}
 	          onChange={this.handleChange} />
 		</label>
@@ -147,7 +146,7 @@ class Register extends Component {
 		Permit Type:
 	        
 		<select
-	        name = "permitType"
+	        name="permitType"
 	        value={this.state.permitType} onChange={this.handleChange}>
 		<option value="student">Student</option>
 		<option value="staff">Staff</option>
