@@ -44,11 +44,9 @@ class Register extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><h2>Register Your Account</h2></label>
-        <br></br>
+        <label><h2>Register Your Account</h2></label><br/>
 
-        <label><h3>User Information</h3></label>
-        <br></br>
+        <label><h3>User Information</h3></label><br/>
         <label>
           First Name:
           <input
@@ -56,8 +54,7 @@ class Register extends Component {
             type="text"
             value={this.state.fname}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           Last Name:
           <input
@@ -65,8 +62,7 @@ class Register extends Component {
             type="text"
             value={this.state.lname}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           NSHE:
           <input
@@ -74,8 +70,7 @@ class Register extends Component {
             type="text"
             value={this.state.NSHE}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           Email:
           <input
@@ -83,8 +78,7 @@ class Register extends Component {
             type="text"
             value={this.state.email}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           Phone Number (i.e. 7022589201):
           <input
@@ -92,11 +86,9 @@ class Register extends Component {
             type="text"
             value={this.state.pnum}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
 
-        <label><h3>Vehicle Information</h3></label>
-        <br></br>
+        <label><h3>Vehicle Information</h3></label><br/>
         <label>
           Color (i.e. Blue):
           <input
@@ -104,8 +96,7 @@ class Register extends Component {
             type="text"
             value={this.state.vColor}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           Car License:
           <input
@@ -113,8 +104,7 @@ class Register extends Component {
             type="text"
             value={this.state.vLic}
             onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
         Car Maker (i.e. Ford):
         <input
@@ -122,8 +112,7 @@ class Register extends Component {
            type="text"
            value={this.state.vMake}
            onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
         Model (i.e. Fusion):
         <input
@@ -131,8 +120,7 @@ class Register extends Component {
            type="text"
            value={this.state.vModel}
            onChange={this.handleChange} />
-        </label>
-        <br></br>
+        </label><br/>
         <label>
           Permit Type:
           <select name="permitType" value={this.state.permitType} onChange={this.handleChange}>
@@ -140,8 +128,7 @@ class Register extends Component {
             <option value="staff">Staff</option>
             <option value="guest">Guest</option>
           </select>
-        </label>
-        <br></br>
+        </label><br/>
         <input type="submit" value="Submit" />
       </form>
   );
