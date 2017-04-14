@@ -14,7 +14,7 @@ class Login extends Component {
     const { auth } = this.props;
 
     return (
-      <div className="Login-Class">
+      <div className="content">
         <div className="Login-Header">
           <img role="presentation" src={logo} onClick={auth.login.bind(this)}/>
         </div>

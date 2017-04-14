@@ -3,11 +3,10 @@
 import React, { Component } from 'react';
 
 class Register extends Component {
-
   render () {
     return (
-      <div className="Register">
-        <h1> Hello from REgister </h1>
+      <div className="Register-Content">
+        <h1> Hello from Register </h1>
       </div>
     );
   }
