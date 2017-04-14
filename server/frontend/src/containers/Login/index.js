@@ -1,6 +1,7 @@
 //src/containers/Login/index.js
 import React, { Component, PropTypes as T } from 'react';
 import AuthService from '../../utils/AuthService';
+import { connect } from 'nectarine';
 
 import logo from './../../assets/logo.png';
 
@@ -23,4 +24,11 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: Login,
+  mapProps
+});
