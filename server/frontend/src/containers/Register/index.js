@@ -55,6 +55,7 @@ class Register extends Component {
             value={this.state.fname}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
           Last Name:
           <input
@@ -63,6 +64,7 @@ class Register extends Component {
             value={this.state.lname}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
           NSHE:
           <input
@@ -71,6 +73,7 @@ class Register extends Component {
             value={this.state.NSHE}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
           Email:
           <input
@@ -79,6 +82,7 @@ class Register extends Component {
             value={this.state.email}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
           Phone Number (i.e. 7022589201):
           <input
@@ -89,6 +93,7 @@ class Register extends Component {
         </label><br/>
 
         <label><h3>Vehicle Information</h3></label><br/>
+
         <label>
           Color (i.e. Blue):
           <input
@@ -97,6 +102,7 @@ class Register extends Component {
             value={this.state.vColor}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
           Car License:
           <input
@@ -105,6 +111,7 @@ class Register extends Component {
             value={this.state.vLic}
             onChange={this.handleChange} />
         </label><br/>
+
         <label>
         Car Maker (i.e. Ford):
         <input
@@ -113,6 +120,7 @@ class Register extends Component {
            value={this.state.vMake}
            onChange={this.handleChange} />
         </label><br/>
+
         <label>
         Model (i.e. Fusion):
         <input
@@ -121,6 +129,7 @@ class Register extends Component {
            value={this.state.vModel}
            onChange={this.handleChange} />
         </label><br/>
+
         <label>
           Permit Type:
           <select name="permitType" value={this.state.permitType} onChange={this.handleChange}>
@@ -129,6 +138,7 @@ class Register extends Component {
             <option value="guest">Guest</option>
           </select>
         </label><br/>
+
         <input type="submit" value="Submit" />
       </form>
   );
