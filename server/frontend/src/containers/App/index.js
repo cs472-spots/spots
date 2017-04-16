@@ -1,13 +1,18 @@
 // src/containers/App
 import React, { Component } from 'react';
 import SocketIOClient from 'socket.io-client';
-import logo from '../../assets/logo.svg';
-import './App.css';
+import { connect } from 'nectarine';
+
+import HeaderBar from '../../components/HeaderBar';
+import SideBar from '../../components/SideBar';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {sidebarOpen: true};
+    this.handleViewSidebar = this.handleViewSidebar.bind(this);
     this.socket = SocketIOClient(location.origin);
     this.sendMessage = this.sendMessage.bind(this);
     this.registerUser = this.registerUser.bind(this);
@@ -15,45 +20,47 @@ class App extends Component {
     this.viewUser = this.viewUser.bind(this);
   }
 
-  render() {
+ render() {
+    let children = null;
+    if (this.props.children) {
+      children = React.cloneElement(this.props.children, {
+        auth: this.props.route.auth //sends auth instance from route to children
+      })
+    }
+
+    var contentClass= this.state.sidebarOpen ? 'content open' : 'content';
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <HeaderBar onClick={this.handleViewSidebar}/>
+        {
+          //<SideBar isOpen={this.state.sidebarOpen} toggleSidebar={this.handleViewSidebar}/>
+        }
+        <SideBar onClick={this.logout.bind(this)} isOpen={this.state.sidebarOpen}/>
+        <div className={contentClass}>
+          {children}
         </div>
-
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        <button onClick={this.sendMessage}>
-            Send Message
-        </button>
-
-        <button onClick={this.registerUser}>
-            Register a User
-        </button>
-
-        <button onClick={this.deleteUser}>
-            Delete a User
-        </button>
-
-        <button onClick={this.viewUser}>
-            View a User
-        </button>
       </div>
     );
   }
 
-
 //Functions
+
   sendMessage() {
     this.socket.emit('hello', 'Hello from application');
     console.log('Sending a message to the server');
     this.socket.on('reply', (message)=>{
       console.log('Received the following messge from server: ' + message);
     });
+  }
+
+  logout() {
+    this.props.route.auth.logout();
+    this.context.router.push('/login');
+  }
+
+  handleViewSidebar() {
+    this.setState({sidebarOpen: !this.state.sidebarOpen});
   }
 
   registerUser(){
@@ -127,4 +134,11 @@ class App extends Component {
         */
 }
 
-export default App;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: App,
+  mapProps
+});
