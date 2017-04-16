@@ -7,7 +7,19 @@ var SPOTS_API_KEY = process.env.SPOTS_API_KEY;
 console.log("Using SPOTS_API_KEY = %s", SPOTS_API_KEY)
 
 /*
-  PUT: used for updating database if spot is vacant or taken
+  GET: retrieve users
+*/
+router.get('/', (req, res, next) => {
+  database.ref('/UserAccounts').once('value', function(data){
+    var users = data.val();
+    console.log(users);
+    res.send({Users: users});
+  });
+});
+
+
+/*
+  POST (update): used for updating database if spot is vacant or taken
 */
 router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
   console.log(req.params);
@@ -48,7 +60,7 @@ router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
 });
 
 /*
-  POST: used for swiping in
+  POST (swipe): used for swiping in
 */
 router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
   console.log(req.params);
