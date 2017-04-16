@@ -12,14 +12,13 @@ var None = permitType.get(1);
 var Student = permitType.get(2);
 var Faculty = permitType.get(3);
 
-var userAccountsRef = database.ref('/UserAccounts');
-
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('frontend/build'));
 
 // REST API connector
 app.use('/spotsHW', spotsHW);
 
+//home
 app.get('/', function(request, response) {
   response.send(fs.readFileSync('index.html', {encoding: 'utf8'}));
   console.log("responded to client")
@@ -64,7 +63,7 @@ io.on('connection', (socket) => {
             viewUser(userProfile.userID);
             break;
         }
-        
+
         break;
     }
   });
@@ -111,6 +110,7 @@ function registerUser(userProfile){
     lastName: userProfile.lastName,
     userEmail: userProfile.email,
     phone: userProfile.phone,
+    cardID: userProfile.cardID,
     permit: userProfile.gotPermit
   });
 
