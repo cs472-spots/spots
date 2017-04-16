@@ -22,7 +22,7 @@ createform.appendChild(fname);
 
 var fninput = document.createElement('input'); // Create Input Field for Name
 fninput.setAttribute("type", "text");
-/*fninput.setAttribute("name", "dname");*/
+//fninput.setAttribute("name", "fName");
 createform.appendChild(fninput);
 
 var linebreak = document.createElement('br');
@@ -116,6 +116,9 @@ createform.appendChild(modelinput);
 
 var linebreak = document.createElement('br');
 createform.appendChild(linebreak);
+
+//submit button
+
 
 //firebase section
 var admin = require("firebase-admin");
