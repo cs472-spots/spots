@@ -7,8 +7,10 @@ Range of parking lots: NV001-NV030
   * NV001-NV010 are for 'Staff'
   * NV011-NV030 are for 'Student'
 
-**If a spot has been recently occupied, call .post(/update) first, then hardware will conduct the 5 minute window for user to swipe in**
+*If a spot has been recently occupied, call post(/update) first, then hardware will conduct the 5 minute window for user to swipe in. 
 
+If user swipes in, use post(/swipe)
+*
 Potential issues / task list:
   - [ ] checking for expired permits
   - [ ] checking for valid parking ID

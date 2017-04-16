@@ -1,0 +1,253 @@
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: #00a65a;
+}
+/* ========================================================================= */
+/* BEGIN NAVIGATION BAR */
+/* spots' logo */
+.navbar-logo {
+  display: block;
+  float: left;
+  height: 50px;
+  font-size: 17px;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  width: 240px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 15px;
+  background-color: #008c4c;
+}
+
+/* TOP NAVIGATION */
+/* navigation bar */
+.navbar {
+  margin-bottom: 0;
+  margin-left: 230px;
+  border: none;
+  min-height: 50px;
+  border-radius: 0;
+}
+
+/* spots' admin */
+.navbar-admin {
+  margin-right: 10px;
+  float: right;
+  color: white;
+  width: 170px;
+  height: 50px;
+  padding: 15px;
+  display: block;
+}
+
+a.navbar-admin:hover {
+  cursor: default;
+  background-color: #008c4c;
+  text-decoration: none;
+  color: white;
+}
+
+a.navbar-admin:link {
+  cursor: default;
+  text-decoration: none;
+  color: white;
+}
+
+a.navbar-admin:visited {
+  background-color: transparent;
+  text-decoration: none;
+  color: white;
+}
+
+/* admin's image */
+.navbar-admin-image {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 10px;
+  margin-top: -2px;
+}
+
+/* toggle-button => ☰ */
+.navbar-sidebar-toggle-button {
+  display: block;
+  float: left;
+  height: 50px;
+  font-size: 15px;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  width: 50px;
+  background-color: transparent;
+  padding: 15px;
+}
+
+a.navbar-sidebar-toggle-button:hover {
+  cursor: default;
+  background-color: #008c4c;
+  text-decoration: none;
+  color: white;
+}
+
+a.navbar-sidebar-toggle-button:link {
+  cursor: default;
+  text-decoration: none;
+  color: white;
+}
+
+a.navbar-sidebar-toggle-button:visited {
+  background-color: transparent;
+  text-decoration: none;
+  color: white;
+}
+
+a.navbar-sidebar-toggle-button:active {
+  background-color: #008c4c;
+  text-decoration: none;
+  color: white;
+}
+/* DONE NAVIGATION BAR */
+/* ========================================================================= */
+/* BEGIN SIDE BAR */
+/* USER PANEL */
+.user-panel {
+  padding: 10px;
+  height: 70px;
+  display: block;
+  /*border-bottom: 1px solid #192125;*/
+}
+
+.user-pull-left {
+  float: left;
+}
+
+.user-pull-left-info {
+  color: lightgray;
+  padding: 5px 5px 5px 15px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.user-online {
+  display: inline-block;
+  background: #3c763d;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.user-online-msg {
+  margin-left: 5px;
+  color: lightgray;
+  font-weight: 200;
+  font-size: 12px;
+}
+
+/* user image */
+.user-panel-image {
+  float: left;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 2px;
+  margin-right: 15px;
+}
+
+/* MAIN NAVIGAION */
+.sidebar-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+
+.sidebar-menu-header {
+  padding: 10px 25px 10px 15px;
+  font-size: 12px;
+  background-color: #192125;
+  color: #3e5058;
+}
+
+.sidebar-menu-item {
+  padding: 10px 25px 10px 15px;
+  height: 45px;
+  color: #b8c7ce;
+  font-size: 15px;
+  font-weight: 350;
+  display: block;
+}
+
+a.sidebar-menu-item:hover {
+  cursor: default;
+  background-color: #1e272b;
+  text-decoration: none;
+  padding-left: 12px;
+  border-left: 3px solid #00a057;
+  color: #b8c7ce;
+}
+
+a.sidebar-menu-item:link {
+  cursor: default;
+  text-decoration: none;
+  color: #b8c7ce;
+}
+
+a.sidebar-menu-item:visited {
+  background-color: transparent;
+  text-decoration: none;
+  color: #b8c7ce;
+}
+
+.sidebar-menu-item-text {
+  padding-left: 10px;
+}
+
+/* REACT STUFF HERE */
+/* sidebar for React */
+.sidebar {
+  position: absolute;
+  top: 50px;
+  left: -240px;
+  height: 100%;
+  width: 240px;
+  transition: left .2s ease-in-out;
+  background-color: #222d32;
+}
+
+/* sidebar-toggle for React */
+.sidebar-toggle {
+  position: absolute;
+  top: 0%;
+  right: -100px;
+  height: 30px;
+  width: 100px;
+  z-index: 1;
+}
+
+/* content */
+.content {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  height: 100%;
+  transition: left .2s ease-in-out;
+  background-color: #F8F8FF;
+}
+/* END SIDE BAR */
+/* ========================================================================= */
+/* animation for React */
+.sidebar.open {
+  left: 0;
+}
+
+.content.open {
+  left: 240px;
+}

@@ -22,7 +22,7 @@ createform.appendChild(fname);
 
 var fninput = document.createElement('input'); // Create Input Field for Name
 fninput.setAttribute("type", "text");
-//fninput.setAttribute("name", "fName");
+//fninput.setAttribute("name", "dName");
 createform.appendChild(fninput);
 
 var linebreak = document.createElement('br');
@@ -116,18 +116,6 @@ createform.appendChild(modelinput);
 
 var linebreak = document.createElement('br');
 createform.appendChild(linebreak);
-
-//submit button
-
-
-//firebase section
-var admin = require("firebase-admin");
-var serviceAccount = require("./fb_credentials.json");
-
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://spots-cba38.firebaseio.com/"
-});
 
 
 
