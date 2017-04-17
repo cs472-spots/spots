@@ -9,12 +9,14 @@ class SpotsMap extends Component {
     zoom: 19
   };
 
+  /*
   getSpots = () => {
   }
 
   renderSpots = () => {
     spots = getSpots()
   }
+  */
 
   render() {
     return (
@@ -26,7 +28,6 @@ class SpotsMap extends Component {
         <Spot
           lat={36.111669}
           lng={-115.141018}
-          text={'Spots'}
         />
       </GoogleMapReact>
     )

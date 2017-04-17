@@ -5,8 +5,9 @@ import { Router,
          Route,
          IndexRedirect } from 'react-router';
 
+import SpotsMap from '../components/SpotsMap';
+
 import App from '../containers/App';
-import Error404 from '../containers/Error404';
 import Home from '../containers/Home';
 import Login from '../containers/Login';
 import Register from '../containers/Register';
@@ -30,7 +31,7 @@ const Routes = () => (
       <Route path="home" component={Home} onEnter={requireAuth} />
       <Route path="register" component={Register} onEnter={requireAuth}/>
       <Route path="view_accounts" component={ViewAccount} onEnter={requireAuth}/>
-      <Route path="monitor_spots" component={Error404} onEnter={requireAuth}/>
+      <Route path="monitor_spots" component={SpotsMap} onEnter={requireAuth}/>
     </Route>
   </Router>
 );
