@@ -68,10 +68,11 @@ class App extends Component {
 
     var data ={
       client: "Admin",
-      username: "alex",
+      username: "blargh",
       password: "abcdefg",
-      userID: 68888888,
-      firstName: "New",
+      userID: 77777777,
+      cardID: 987654321,
+      firstName: "Mipp",
       lastName: "Name",
       email: "newname@gmail.com",
       phone: 3874635235,
