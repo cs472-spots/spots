@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { connect } from 'nectarine';
 
 import Spot from './Spot';
 
@@ -34,4 +35,11 @@ class SpotsMap extends Component {
   }
 }
 
-export default SpotsMap;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: SpotsMap,
+  mapProps
+});
