@@ -20,8 +20,8 @@
 #define spotID  "NV010"  //  The lot number the hardware is set up at, must be changed for each post...
 
 // These two fields must be changed if a different access point is used.
-#define weefee_ID       "stuff"
-#define weefee_Password "stuffy"
+#define weefee_ID       "Weefee"
+#define weefee_Password "weefeefee"
 
 #define Green_Led   15
 #define Red_Led     0
@@ -40,13 +40,15 @@ unsigned long current_time = 0;
 unsigned long timer = 0;
 unsigned int timeLimit = 20000;  // Time in milliseconds for sign in
 
-RestClient client = RestClient("6cb06ef3.ngrok.io");
+// URL for server communications must be added here
+RestClient client = RestClient("server");
+
 String response;
 String path;
 
 bool cardPresent = false;
 bool authorized = false;
-bool flag;
+bool vacancyFlag;
 
 // List of all the beautiful functions used for this immaculate device
 void Wifi_connect();    // Setup code to connect the ESP8266 to the wifi_chip
@@ -78,6 +80,7 @@ void setup() {
   pinMode(Sensor_Pin, INPUT);
   digitalWrite(Green_Led, HIGH);
   digitalWrite(Red_Led, LOW);
+  updateVacancy(true); // Set the vacancy of the spot to true at startup
 }
 
 void loop() {
@@ -87,16 +90,18 @@ void loop() {
   digitalWrite(Red_Led, LOW);
   authorized = false;
   start_time = millis();
-  flag = false;
+  vacancyFlag = false;
+
+  ensureWiFiConnection();
   
   while(!digitalRead(Sensor_Pin)){
-    flag = true;
+    vacancyFlag = true;
     Serial.print("Updating spot vacancy to false...");
     Serial.println();
-    while(!updateVacancy(false)) {
-      delay(100); // Continuously attempt to update Vacancy if the call fails....
-      start_time = millis();
-    }
+    
+    updateVacancy(false);     
+    start_time = millis();
+    
     Serial.print("Pwease Scan an ID Card (^.^)\n");
     while( !digitalRead(Sensor_Pin) && readCard() && timer < timeLimit) {
       delay(50);
@@ -117,18 +122,6 @@ void loop() {
     // If the user timed out
     if(timer > timeLimit) {
       Serial.print("Uh Oh darling, you ran out of time =(\n");
-      // ****************************************************************
-      //  Just so it can easily be seen...
-      //  Update database of timeOut
-      // ****************************************************************
-      // Kind of an odd workaround...
-      // Logic here is that they either didn't scan a card... or took too long
-      // Thus we send an authorization request with a UID that is guaranteed to not
-      // be valid, this updates the server of an invalid parking at that spot...
-      // At least... that's my thought process...
-//      UID = 0;
-//      authorized = checkAuthorization();
-//    ****** Note.... I'm not even sure this is needed... I highly doubt it but eh...
       
       bool flash = true;
       while(!digitalRead(Sensor_Pin) && readCard()) 
@@ -137,18 +130,14 @@ void loop() {
         flash = !flash;
         delay(250);   // Delay 250ms
       }
-      // If the object left exit the loop
+      // If the object, left exit the loop
       if(digitalRead(Sensor_Pin))
         break;               
     }
     get_UID();
-    // ****************************************************************
-    //  Just so it can easily be seen...
-    // Send UID to database to see if card is authorized
-    // ****************************************************************
 
-    //authorized = checkAuthorization();
-    authorized = cheatAuthorization2();
+    authorized = checkAuthorization();
+    //authorized = cheatAuthorization2(); 
 
     if(authorized) {
       Serial.print("Maaa!!!!! I did it!!! (Authorized user) \n");
@@ -174,21 +163,26 @@ void loop() {
       }
     }
   }
-  if(flag == true) {
+  if(vacancyFlag == true) {
     Serial.print("Guess they left... (Object no longer detected)\n");
     Serial.print("Updating spot vacancy to true...");
     Serial.println();
-    while(!updateVacancy(true)) {
-      delay(100);
-    }
-    delay(500);  // Delay for 1/2 Second
+    updateVacancy(true);
   }
-  delay(250); // Check for card every 250ms to avoid WDT resets
+  delay(100); // Check for card every 250ms to avoid WDT resets
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////           Functions used for Program are Below =]         ////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ensureWiFiConnection() {
+  if(WiFi.status() != WL_CONNECTED) {
+    Serial.print("WiFi Connection Lost, Attempting to reconnect...\n");
+    Wifi_connect();
+  }
+  return;
+}
 
 // Connects the ESP8266 to a WiFi Network
 // If unable to connect, check the weefee_ID and weefee_Password fields
@@ -201,7 +195,7 @@ void Wifi_connect()
   Serial.print("Connecting to ze network...");
   while (WiFi.status() != WL_CONNECTED) {
     //Serial.print(".");
-    delay(500);
+    delay(25);
   }
   Serial.println();
   Serial.print("connected: ");
@@ -258,7 +252,8 @@ bool cheatAuthorization() {
 bool cheatAuthorization2() {
   Serial.print("Attempting to cheat Authorization...\n");
   if(UID == 0x647B403B){
-    UID = 12345678; // This is a staff ID#
+    //UID = 12345678; // This is a staff ID#
+    //UID = 1588024368; // This is a staff card created by the script.
     Serial.print("Authorization should be set to True\n");
     return (checkAuthorization());
   }
@@ -292,7 +287,7 @@ bool updateVacancy(bool vacant)
 {
   String updatePath = createPath("update");
   const char * c;
-  int statusCode;
+  int statusCode = 0;
   response = "";
   
   if(vacant) {
@@ -306,15 +301,17 @@ bool updateVacancy(bool vacant)
   Serial.print("Generated path: ");
   Serial.print(c);
   Serial.println();
-  delay(10);
   // This is done in this way because client.post requires a const char* for the path...
   // client.post(const char* path, const char* body, String* response)
-  statusCode = client.post(c, "POSTDATA", &response);
+  // If status code == 0 then connection to server failed...
+  while(statusCode == 0){
+    statusCode = client.post(c, "POSTDATA", &response);
+    ensureWiFiConnection();
+  }  
   Serial.print("Status code from server: ");
   Serial.println(statusCode);
   Serial.print("Response body from server: ");
   Serial.println(response);
-  delay(10);
   if(statusCode == 200) // Status Code 200 means "OK"
     return true;
   else
@@ -331,14 +328,18 @@ bool checkAuthorization()
   String cardID = String(UID);
   swipePath = swipePath + cardID;
   const char * c;
-  int statusCode;
+  int statusCode = 0;
   int len;
   
   c = swipePath.c_str();
   Serial.print("swipePath: ");
   Serial.print(c);
   Serial.println();
-  statusCode = client.post(c, "POSTDATA", &response);
+  // If status code == 0 then connection to server failed...
+  while(statusCode == 0){
+    statusCode = client.post(c, "POSTDATA", &response);
+    ensureWiFiConnection();
+  }  
   Serial.print("Status code from server: ");
   Serial.println(statusCode);
   Serial.print("Response body from server: ");
@@ -354,3 +355,4 @@ bool checkAuthorization()
   // if we can't find "true" in the response string, user is not authorized...
   return false;
 }
+
