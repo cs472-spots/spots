@@ -11,6 +11,17 @@ class SpotsMap extends Component {
   };
 
   renderSpots = () => {
+    var spots = this.props.getSpots()
+    var renderedSpots = Object.keys(spots).map((key, index) => {
+      console.log(spots[key]);
+      return (
+        <Spot
+          key={index}
+          {...spots[key]}
+        />
+      );
+    });
+
     return [(
       <Spot
         lat={36.106992}
@@ -41,7 +52,9 @@ class SpotsMap extends Component {
 }
 
 const mapProps = (store) => {
-  return {}
+  return {
+    getSpots: store.sessionSlice.getSpots
+  }
 }
 
 export default connect({
