@@ -1,6 +1,6 @@
 import React from 'react';
 
-const K_WIDTH = 5;
+const K_WIDTH = 3;
 const K_HEIGHT = K_WIDTH * 3;
 
 const greatPlaceStyle = {

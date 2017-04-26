@@ -4,16 +4,18 @@ import { connect } from 'nectarine';
 
 import Spot from './Spot';
 
+const LAT = 36.106992;
+const LNG = -115.143744;
+
 class SpotsMap extends Component {
   static defaultProps = {
-    center: {lat: 36.106992, lng: -115.143744},
+    center: {lat: LAT, lng: LNG},
     zoom: 19
   };
 
   renderSpots = () => {
     var spots = this.props.getSpots()
     var renderedSpots = Object.keys(spots).map((key, index) => {
-      console.log(spots[key]);
       return (
         <Spot
           key={index}
@@ -22,20 +24,7 @@ class SpotsMap extends Component {
       );
     });
 
-    return [(
-      <Spot
-        lat={36.106992}
-        lng={-115.143744}
-        key='1'
-      />
-    ),
-    (
-      <Spot
-        lat={36.106795}
-        lng={-115.143744}
-        key='2'
-      />
-    )]
+    return renderedSpots;
   }
 
   render() {
@@ -45,7 +34,7 @@ class SpotsMap extends Component {
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
       >
-      {this.renderSpots()}
+        {this.renderSpots()}
       </GoogleMapReact>
     )
   }
