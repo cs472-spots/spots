@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'nectarine';
 
 class Error404 extends Component {
   render () {
@@ -10,4 +11,11 @@ class Error404 extends Component {
   }
 }
 
-export default Error404;
+const mapProps = (store) => {
+  return {}
+}
+
+export default connect({
+  component: Error404,
+  mapProps
+});

@@ -1,7 +1,10 @@
 import React from 'react';
+/* eslint-disable */
 
 class HeaderBar extends React.Component {
   render() {
+    const { profile } = this.props;
+
     return (
       <header>
         {
@@ -24,7 +27,7 @@ class HeaderBar extends React.Component {
           <div>
             <a href="#" className="navbar-admin">
               <img src="img/jedi.jpg" className="navbar-admin-image"></img>
-              <span>obi-wan kenobi</span>
+              <span>{ profile.name }</span>
             </a>
           </div>
         </nav>

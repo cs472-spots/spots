@@ -15,6 +15,8 @@ const sessionSlice = createSlice({
     sample: function(guest) {
       console.log("this action does nothing");
     }
+    //need to create an action to get profile name
+    //problem is waiting for $set to finish before using $get
   }
 })
 
