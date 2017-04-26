@@ -1,8 +1,9 @@
 //src/containers/Login/index.js
 import React, { Component, PropTypes as T } from 'react';
-import AuthService from '../../utils/AuthService';
+import SocketIOClient from 'socket.io-client'
 import { connect } from 'nectarine';
 
+import AuthService from '../../utils/AuthService';
 import logo from './../../assets/logo.png';
 
 class Login extends Component {
@@ -11,21 +12,30 @@ class Login extends Component {
     auth: T.instanceOf (AuthService)
   }
 
+  constructor (props) {
+		super(props);
+		this.props.setSocket(SocketIOClient(location.origin));
+	}
+
   render() {
     const { auth } = this.props;
-
+    auth.lock.show();
     return (
-      <div className="content">
-        <div className="Login-Header">
-          <img role="presentation" src={logo} onClick={auth.login.bind(this)}/>
+      <div>
+        <div>
+          <img role="presentation" src={logo}/>
         </div>
       </div>
     );
   }
 }
 
+
 const mapProps = (store) => {
-  return {}
+  return {
+    //States resets after refresh
+    setSocket: (socket) => store.sessionSlice.socket.$set(socket)
+  }
 }
 
 export default connect({
