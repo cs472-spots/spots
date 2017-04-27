@@ -3,15 +3,11 @@ import React from 'react';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {searchVisible: false}
+    this.state = {
+      searchVisible: true,
+      search: ''
+    }
     this.showSearch = this.showSearch.bind(this);
-  }
-
-  // Visibility when run on the state
-  showSearch() {
-    this.setState({
-      searchVisible: !this.state.searchVisible
-    });
   }
 
   render() {
@@ -32,13 +28,22 @@ class SearchBar extends React.Component {
         <input
          type="text"
          className={searchInputClasses.join(' ')}
-         placeholder="I'm searching for..."/>
+         value={this.props.search}
+         onChange={this.props.handleChange}
+         placeholder="Search by User ID"/>
        {/**/}
        <div className="w3-xlarge">
-       <div onClick={this.showSearch}
+       <div onClick={this.props.onClick}
         className="fa fa-search searchIcon"></div></div>
       </div>
     )
+  }
+
+  // Visibility when run on the state
+  showSearch() {
+    this.setState({
+      searchVisible: true
+    });
   }
 }
 

@@ -11,38 +11,51 @@ class ViewAccount extends Component {
 		super(props);
 		this.state = {
 			pageName: "View Payments & Fees",
-			pgDescription: "Staff and Students"
+			pgDescription: "Staff and Students",
+			search: ''
 		};
 		this.viewUser= this.viewUser.bind(this);
 	}
 
 	render () {
-		const { sessionSocket } = this.props;
-		const { pageName, pgDescription } = this.state;
+		const { sessionSocket }=this.props;
+		const { pageName, pgDescription }=this.state;
 		console.log (this.props)
-		//sessionSocket.on ('connect', () => {console.log(sessionSocket.id)})
 
 		return (
 			<div>
-				<SearchHeader activeName = {pageName} description = {pgDescription} />
-				<SearchBar />
+				<SearchHeader activeName={pageName} description={pgDescription} />
+				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
 				<SearchForm />
 			</div>
 		);
 	}
 
-	viewUser(socket){
-    console.log('Requested tor view a user');
+	handleChange = (event) => {
+    const target = event.target;
+    const value = target.value;
+    this.setState({
+      search: value
+    });
+  }
+
+	handleSubmit = (event) => {
+    event.preventDefault();
+    this.viewUser();
+  }
+
+	viewUser(){
+    console.log('Requested to view a user');
     var data = {
       client: "Admin",
       flag: "viewUser",
-      userID: 68888888
+      userID: parseInt(this.state.search)
     }
 
-    socket.emit('client', data);
-    socket.on('userInfo', (info)=>{
+  	this.props.sessionSocket.emit('client', data);
+    this.props.sessionSocket.on('userInfo', (info)=>{
       console.log('Listening for info');
-      console.log(info);
+      alert(info);
     });
   }
 
