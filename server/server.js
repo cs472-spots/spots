@@ -27,7 +27,6 @@ app.get('/', function(request, response) {
 
 io.on('connection', (socket) => {
   logger("Client connected - " + socket.id);
-  console.log("client connected?");
 
   socket.on('client', (data) => {
     var userProfile = data;
