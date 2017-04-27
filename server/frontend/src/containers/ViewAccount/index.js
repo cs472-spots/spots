@@ -10,12 +10,14 @@ class ViewAccount extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
+
 			pageName: "View Accounts",
 			pgDescription: "Staff and Students",
 			search: ''
 		};
 		this.viewUser= this.viewUser.bind(this);
 	}
+
 
 	handleChange = (event) => {
     const target = event.target;
@@ -29,6 +31,20 @@ class ViewAccount extends Component {
     event.preventDefault();
     this.viewUser();
   }
+
+	render () {
+		const { sessionSocket }=this.props;
+		const { pageName, pgDescription }=this.state;
+		console.log (this.props)
+
+		return (
+			<div>
+				<SearchHeader activeName={pageName} description={pgDescription} />
+				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
+				<SearchForm />
+			</div>
+		);
+	}
 
 	viewUser(){
     console.log('Requested to view a user');

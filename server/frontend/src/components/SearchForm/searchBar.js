@@ -37,5 +37,12 @@ class SearchBar extends React.Component {
       </div>
     )
   }
+
+  // Visibility when run on the state
+  showSearch() {
+    this.setState({
+      searchVisible: true
+    });
+  }
 }
 export default SearchBar;
