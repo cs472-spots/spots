@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'nectarine';
 import SearchHeader from '../../components/SearchForm/searchHeader.js';
+/* eslint-disable */
 
 //registration form
 class Register extends Component {
@@ -63,6 +64,45 @@ class Register extends Component {
       //Do nothing, allow user to fix input
     }
     event.preventDefault();
+  }
+
+  registerUser(){
+    var vInt = 1;
+
+    var data ={
+      client: "Admin",
+      username: this.state.uname,
+      userID: parseInt(this.state.NSHE),
+      cardID: parseInt(this.state.cid),
+      firstName: this.state.fname,
+      lastName: this.state.lname,
+      email: this.state.email,
+      phone: parseInt(this.state.pnum),
+      gotPermit: true,
+      permitType: this.state.permitType,
+      purchaseDate: this.state.curDate,
+      expDate: this.state.futDate,
+      type: this.state.permitType,
+      vehicleInt: vInt,
+      v1_make: this.state.vMake,
+      v1_model: this.state.vModel,
+      v1_color: this.state.vColor,
+      v1_plate: this.state.vLic,
+      v2_make: "Honda",
+      v2_model: "Civic",
+      v2_color: "Red",
+      v2_plate: "licensePlate2",
+    };
+
+    if(vInt===1){
+      data.v2_make = null;
+      data.v2_model = null;
+      data.v2_color = null;
+      data.v2_plate = null;
+    }
+
+    this.props.sessionSocket.emit('client', data);
+    console.log('Sent data to server');
   }
 
     //EXECUTION TIME!
@@ -259,46 +299,6 @@ class Register extends Component {
         </div>
       </div>
   );
-  }
-
-  registerUser(){
-    var vInt = 1;
-
-    var data ={
-      client: "Admin",
-      username: this.state.uname,
-      password: "abcdefg",
-      userID: parseInt(this.state.NSHE),
-      cardID: parseInt(this.state.cid),
-      firstName: this.state.fname,
-      lastName: this.state.lname,
-      email: this.state.email,
-      phone: parseInt(this.state.pnum),
-      gotPermit: true,
-      permitType: this.state.permitType,
-      purchaseDate: this.state.curDate,
-      expDate: this.state.futDate,
-      type: this.state.permitType,
-      vehicleInt: vInt,
-      v1_make: this.state.vMake,
-      v1_model: this.state.vModel,
-      v1_color: this.state.vColor,
-      v1_plate: this.state.vLic,
-      v2_make: "Honda",
-      v2_model: "Civic",
-      v2_color: "Red",
-      v2_plate: "licensePlate2",
-    };
-
-    if(vInt===1){
-      data.v2_make = null;
-      data.v2_model = null;
-      data.v2_color = null;
-      data.v2_plate = null;
-    }
-
-    this.props.sessionSocket.emit('client', data);
-    console.log('Sent data to server');
   }
 }
 

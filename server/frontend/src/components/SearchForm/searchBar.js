@@ -7,7 +7,6 @@ class SearchBar extends React.Component {
       searchVisible: true,
       search: ''
     }
-    this.showSearch = this.showSearch.bind(this);
   }
 
   render() {
@@ -46,5 +45,4 @@ class SearchBar extends React.Component {
     });
   }
 }
-
 export default SearchBar;

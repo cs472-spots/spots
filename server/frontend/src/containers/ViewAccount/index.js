@@ -4,32 +4,20 @@ import { connect } from 'nectarine';
 import SearchForm from '../../components/SearchForm/searchForm.js';
 import SearchHeader from '../../components/SearchForm/searchHeader.js';
 import SearchBar from '../../components/SearchForm/searchBar.js';
-
+/* eslint-disable */
 
 class ViewAccount extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-			pageName: "View Payments & Fees",
+
+			pageName: "View Accounts",
 			pgDescription: "Staff and Students",
 			search: ''
 		};
 		this.viewUser= this.viewUser.bind(this);
 	}
 
-	render () {
-		const { sessionSocket }=this.props;
-		const { pageName, pgDescription }=this.state;
-		console.log (this.props)
-
-		return (
-			<div>
-				<SearchHeader activeName={pageName} description={pgDescription} />
-				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
-				<SearchForm />
-			</div>
-		);
-	}
 
 	handleChange = (event) => {
     const target = event.target;
@@ -43,6 +31,7 @@ class ViewAccount extends Component {
     event.preventDefault();
     this.viewUser();
   }
+
 
 	viewUser(){
     console.log('Requested to view a user');
@@ -58,6 +47,20 @@ class ViewAccount extends Component {
       alert(info);
     });
   }
+
+	//Render Function
+	render () {
+		const { pageName, pgDescription }=this.state;
+		console.log (this.props)
+
+		return (
+			<div>
+				<SearchHeader activeName={pageName} description={pgDescription} />
+				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
+				<SearchForm />
+			</div>
+		);
+	}
 
 }
 
