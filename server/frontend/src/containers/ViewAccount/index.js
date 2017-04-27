@@ -32,19 +32,6 @@ class ViewAccount extends Component {
     this.viewUser();
   }
 
-	render () {
-		const { sessionSocket }=this.props;
-		const { pageName, pgDescription }=this.state;
-		console.log (this.props)
-
-		return (
-			<div>
-				<SearchHeader activeName={pageName} description={pgDescription} />
-				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
-				<SearchForm />
-			</div>
-		);
-	}
 
 	viewUser(){
     console.log('Requested to view a user');
