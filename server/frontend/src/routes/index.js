@@ -7,7 +7,6 @@ import { Router,
 
 import App from '../containers/App';
 import Error404 from '../containers/Error404';
-import Home from '../containers/Home';
 import Login from '../containers/Login';
 import MonitorSpots from '../containers/MonitorSpots';
 import Register from '../containers/Register';

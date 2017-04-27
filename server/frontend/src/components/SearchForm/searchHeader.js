@@ -2,8 +2,7 @@ import React from 'react';
 
 class SearchHeader extends React.Component {
   render() {
-    {/**/}
-    const { activeName, description, isHome } = this.props;
+    const { activeName, description } = this.props;
     return (
       <div className="content-header">
         <h1>
