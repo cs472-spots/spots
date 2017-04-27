@@ -9,7 +9,7 @@ class AuthService extends EventEmitter {
     super ();
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'http://localhost:3000/',
+        redirectUrl: location.origin,
         responseType: 'token'
       },
       closable: false,
