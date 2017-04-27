@@ -1,6 +1,5 @@
 //src/containers/Login/index.js
 import React, { Component, PropTypes as T } from 'react';
-import SocketIOClient from 'socket.io-client'
 import { connect } from 'nectarine';
 
 import AuthService from '../../utils/AuthService';
@@ -11,11 +10,6 @@ class Login extends Component {
     location: T.object,
     auth: T.instanceOf (AuthService)
   }
-
-  constructor (props) {
-		super(props);
-		this.props.setSocket(SocketIOClient(location.origin));
-	}
 
   render() {
     const { auth } = this.props;
@@ -33,8 +27,6 @@ class Login extends Component {
 
 const mapProps = (store) => {
   return {
-    //States resets after refresh
-    setSocket: (socket) => store.sessionSlice.socket.$set(socket)
   }
 }
 

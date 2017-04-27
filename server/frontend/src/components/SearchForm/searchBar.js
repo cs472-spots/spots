@@ -7,7 +7,6 @@ class SearchBar extends React.Component {
       searchVisible: true,
       search: ''
     }
-    this.showSearch = this.showSearch.bind(this);
   }
 
   render() {
@@ -38,13 +37,5 @@ class SearchBar extends React.Component {
       </div>
     )
   }
-
-  // Visibility when run on the state
-  showSearch() {
-    this.setState({
-      searchVisible: true
-    });
-  }
 }
-
 export default SearchBar;
