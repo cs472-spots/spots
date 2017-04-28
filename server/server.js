@@ -5,6 +5,8 @@ var io = require('socket.io')(server);
 var fs = require('fs');
 var database = require("./src/database");
 var spotsHW = require("./routes/spotsHW");
+//var spotsMobile = require('./routes/spotsMobile');
+//var parks = require("./park/parking");
 var Enum = require('enum');
 
 var permitType = new Enum(['none', 'Student', 'Faculty']);
@@ -18,7 +20,12 @@ app.use(express.static('frontend/build'));
 // REST API connector
 app.use('/spotsHW', spotsHW);
 
+// Parking Page
+//app.use('/parkingSpots', parks);
+//app.use('/Mobile, spotsMobile');
+
 //home
+
 app.get('/', function(request, response) {
   response.send(fs.readFileSync('index.html', {encoding: 'utf8'}));
   console.log("responded to client")
@@ -235,6 +242,4 @@ function viewUser(userID){
     console.log(userInfo);
     io.emit('userInfo', userInfo);
   });
-
-
 }
