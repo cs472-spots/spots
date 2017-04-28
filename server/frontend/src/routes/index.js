@@ -5,8 +5,6 @@ import { Router,
          Route,
          IndexRedirect } from 'react-router';
 
-import SpotsMap from '../components/SpotsMap';
-
 import App from '../containers/App';
 import Error404 from '../containers/Error404';
 import Login from '../containers/Login';
