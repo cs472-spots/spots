@@ -8,8 +8,9 @@ import { Router,
 import SpotsMap from '../components/SpotsMap';
 
 import App from '../containers/App';
-import Home from '../containers/Home';
+import Error404 from '../containers/Error404';
 import Login from '../containers/Login';
+import MonitorSpots from '../containers/MonitorSpots';
 import Register from '../containers/Register';
 import ViewAccount from '../containers/ViewAccount';
 
@@ -26,12 +27,12 @@ const requireAuth = (nextState, replace) => {
 const Routes = () => (
   <Router>
     <Route path="/" component={App} auth={auth}>
-      <IndexRedirect to="/home" />
+      <IndexRedirect to="monitor_spots" />
       <Route path="login" component={Login} />
-      <Route path="home" component={Home} onEnter={requireAuth} />
       <Route path="register" component={Register} onEnter={requireAuth}/>
       <Route path="view_accounts" component={ViewAccount} onEnter={requireAuth}/>
-      <Route path="monitor_spots" component={SpotsMap} onEnter={requireAuth}/>
+      <Route path="monitor_spots" component={MonitorSpots} onEnter={requireAuth}/>
+      <Route path="*" component={Error404}/>
     </Route>
   </Router>
 );

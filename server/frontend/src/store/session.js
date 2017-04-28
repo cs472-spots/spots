@@ -21,6 +21,8 @@ const sessionSlice = createSlice({
       this.slice.spots.$set(spotsObj);
       return this.slice.spots.$get();
     }
+    //need to create an action to get profile name
+    //problem is waiting for $set to finish before using $get
   }
 })
 
