@@ -2,8 +2,8 @@ import React from 'react';
 
 class SideBar extends React.Component {
 
-
   render() {
+    const { profile } = this.props;
     var sidebarClass = this.props.isOpen ? 'sidebar open' : 'sidebar';
 
     return (
@@ -14,10 +14,10 @@ class SideBar extends React.Component {
           }
           <div className="user-panel">
             <div className="user-pull-left">
-              <img src="img/jedi.jpg" className="user-panel-image"></img>
+              <img role="presentation" src="img/jedi.jpg" className="user-panel-image"></img>
             </div>
             <div className="user-pull-left-info">
-              <p>Hello obi-wan</p>
+              <p>Hello { profile.name }</p>
               <i className="user-online"></i>
               <i className="user-online-msg">Online</i>
             </div>

@@ -1,8 +1,8 @@
 //src/containers/Login/index.js
 import React, { Component, PropTypes as T } from 'react';
-import AuthService from '../../utils/AuthService';
 import { connect } from 'nectarine';
 
+import AuthService from '../../utils/AuthService';
 import logo from './../../assets/logo.png';
 
 class Login extends Component {
@@ -13,19 +13,21 @@ class Login extends Component {
 
   render() {
     const { auth } = this.props;
-
+    auth.lock.show();
     return (
-      <div className="content">
-        <div className="Login-Header">
-          <img role="presentation" src={logo} onClick={auth.login.bind(this)}/>
+      <div>
+        <div>
+          <img role="presentation" src={logo}/>
         </div>
       </div>
     );
   }
 }
 
+
 const mapProps = (store) => {
-  return {}
+  return {
+  }
 }
 
 export default connect({
