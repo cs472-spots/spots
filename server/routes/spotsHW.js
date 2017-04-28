@@ -17,6 +17,15 @@ router.get('/', (req, res, next) => {
   });
 });
 
+router.get('/:key/:lotID/:spotID', (req, res, next) => {
+  database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID).once('value', function(data){
+    console.log(data.val().vacancy);
+    var spotVacancy = data.val().vacancy;
+    console.log(req.params.spotID + ' vacancy is ' + spotVacancy);
+    res.send({Vacancy: spotVacancy});
+  });
+});
+
 
 /*
   POST (update): used for updating database if spot is vacant or taken
