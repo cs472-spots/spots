@@ -23,7 +23,7 @@ function createMapOptions (maps) {
 class SpotsMap extends Component {
   static defaultProps = {
     center: {lat: LAT, lng: LNG},
-    zoom: 19
+    zoom: 20
   };
 
   renderSpots = () => {
