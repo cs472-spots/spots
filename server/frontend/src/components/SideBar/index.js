@@ -29,25 +29,25 @@ class SideBar extends React.Component {
         <ul className="sidebar-menu">
           <li className="sidebar-menu-header">MAIN NAVIGATION</li>
           <li>
-            <a href="#/register" className="sidebar-menu-item">
+            <a href="#/app/register" className="sidebar-menu-item">
               <i className="fa fa-edit"></i>
               <span className="sidebar-menu-item-text">Register Students</span>
             </a>
           </li>
           <li>
-            <a href="#/view_accounts" className="sidebar-menu-item">
+            <a href="#/app/view_accounts" className="sidebar-menu-item">
               <i className="fa fa-book"></i>
-              <span className="sidebar-menu-item-text">View Payments & Fees</span>
+              <span className="sidebar-menu-item-text">View Accounts</span>
             </a>
           </li>
           <li>
-            <a href="#/monitor_spots" className="sidebar-menu-item">
+            <a href="#/app/monitor_spots" className="sidebar-menu-item">
               <i className="fa fa-laptop"></i>
               <span className="sidebar-menu-item-text">Monitor Spots</span>
             </a>
           </li>
           <li>
-            <a href="#/login" onClick={this.props.onClick} className="sidebar-menu-item">
+            <a href="#/app/login" onClick={this.props.onClick} className="sidebar-menu-item">
               <i className="fa fa-laptop"></i>
               <span className="sidebar-menu-item-text">Logout</span>
             </a>

@@ -34,6 +34,14 @@ class App extends Component {
     this.props.setSocket(SocketIOClient(location.origin));
   }
 
+  componentWillMount () {
+      document.body.style.background = "#222d32";
+  }
+
+  componentWillUnmount () {
+      document.body.style.background = null;
+  }
+
   //Render Function
   render() {
     let children = null;

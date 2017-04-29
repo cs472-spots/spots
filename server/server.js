@@ -25,6 +25,7 @@ app.get('/', function(request, response) {
   logger("responded to client");
 });
 
+
 io.on('connection', (socket) => {
   logger("Client connected - " + socket.id);
 
@@ -90,6 +91,7 @@ server.listen(app.get('port'), function() {
 function registerUser(userProfile){
   var userIDRef = database.ref('UserAccounts/' + userProfile.userID);
 
+/*
   //logger('Password passed to registerUser() is: ' + userProfile.password);
   //Hash password for security
   var passwd = hashFunction(userProfile.password);
@@ -105,7 +107,7 @@ function registerUser(userProfile){
   login.set({
     Password: passwd
   });
-
+*/
   userIDRef.set({
     firstName: userProfile.firstName,
     lastName: userProfile.lastName,
@@ -124,14 +126,16 @@ function registerUser(userProfile){
 
     logger('Number of vehicles: ' + userProfile.vehicleInt);
     if(userProfile.vehicleInt<=2){
-      database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v1').set({
+      database.ref('UserAccounts/' + userProfile.userID + '/vehicles/vehicle1').set({
+        //year: userProfile.v1_year,
         make: userProfile.v1_make,
         model: userProfile.v1_model,
         color: userProfile.v1_color,
         licensePlate: userProfile.v1_plate
       });
       if(userProfile.vehicleInt===2){
-        database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v2').set({
+        database.ref('UserAccounts/' + userProfile.userID + '/vehicles/vehicle2').set({
+          //year: userProfile.v2_year,
           make: userProfile.v2_make,
           model: userProfile.v2_model,
           color: userProfile.v2_color,
@@ -209,7 +213,8 @@ function viewUser(userID){
         firstName: snapshot.val().firstName,
         lastName: snapshot.val().lastName,
         email: snapshot.val().userEmail,
-        phone: snapshot.val().phone
+        phone: snapshot.val().phone,
+        cardid: snapshot.val().cardID
       };
 
       if(snapshot.val().permit != null){
@@ -218,16 +223,18 @@ function viewUser(userID){
         userInfo.expDate = snapshot.val().expDate;
 
         if(snapshot.val().vehicles !=null){
-          userInfo.v1_make = snapshot.val().vehicles.v1.make;
-          userInfo.v1_model = snapshot.val().vehicles.v1.model;
-          userInfo.v1_color = snapshot.val().vehicles.v1.color;
-          userInfo.v1_plate = snapshot.val().vehicles.v1.licensePlate;
+          //userInfo.v1_year = snapshot.val().vehicles.v1.year;
+          userInfo.v1_make = snapshot.val().vehicles.vehicle1.make;
+          userInfo.v1_model = snapshot.val().vehicles.vehicle1.model;
+          userInfo.v1_color = snapshot.val().vehicles.vehicle1.color;
+          userInfo.v1_plate = snapshot.val().vehicles.vehicle1.licensePlate;
 
-          if(snapshot.val().vehicles.v2 !=null){
-            userInfo.v2_make = snapshot.val().vehicles.v2.make;
-            userInfo.v2_model = snapshot.val().vehicles.v2.model;
-            userInfo.v2_color = snapshot.val().vehicles.v2.color;
-            userInfo.v2_plate = snapshot.val().vehicles.v2.licensePlate;
+          if(snapshot.val().vehicles.vehicle2 !=null){
+            //userInfo.v2_year = snapshot.val().vehicles.v2.year;
+            userInfo.v2_make = snapshot.val().vehicles.vehicle2.make;
+            userInfo.v2_model = snapshot.val().vehicles.vehicle2.model;
+            userInfo.v2_color = snapshot.val().vehicles.vehicle2.color;
+            userInfo.v2_plate = snapshot.val().vehicles.vehicle2.licensePlate;
           }
         }
       }
