@@ -14,7 +14,7 @@ import ViewAccount from '../containers/ViewAccount';
 
 import AuthService from '../utils/AuthService'
 
-const auth = new AuthService('XEtMLkSEfZPviZEEkj3uWw1itw0W5nYy', 'nhand2.auth0.com');
+const auth = new AuthService('SNuRPg9JQM3P0FKkWo6VCfVE3Bvl2oIa', 'app63320791.auth0.com');
 
 const requireAuth = (nextState, replace) => {
   if (!auth.loggedIn()) {
