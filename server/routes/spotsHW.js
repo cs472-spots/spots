@@ -7,15 +7,33 @@ var logger = require("../src/logger");
 var SPOTS_API_KEY = process.env.SPOTS_API_KEY;
 logger("Using SPOTS_API_KEY = " + SPOTS_API_KEY)
 
+function handleApiKey(key, done) {
+  var err;
+  if(key != SPOTS_API_KEY) {
+    logger("Invalid API key received.");
+    err = new Error;
+  }
+  return done(err);
+}
+
 /*
   GET: retrieve users
 */
-router.get('/', (req, res, next) => {
-  database.ref('/UserAccounts').once('value', function(data){
-    var users = data.val();
-    logger(users);
-    res.send({Users: users});
-  });
+router.get('/getUsers/:key', (req, res, next) => {
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/UserAccounts').once('value', function(data){
+      var users = data.val();
+      logger("Sending:");
+      logger(users);
+      res.send({Users: users});
+      return users;
+    });
+  })
 });
 
 router.get('/:key/:lotID/:spotID', (req, res, next) => {
