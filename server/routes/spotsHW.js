@@ -20,6 +20,7 @@ function handleApiKey(key, done) {
   GET: retrieve users
 */
 router.get('/getUsers/:key', (req, res, next) => {
+  logger("getUsers called");
   handleApiKey(req.params.key, function(err) {
     if(err) {
       res.status(401).send({error:"invalid key"});
@@ -28,21 +29,26 @@ router.get('/getUsers/:key', (req, res, next) => {
 
     database.ref('/UserAccounts').once('value', function(data){
       var users = data.val();
-      logger("Sending:");
       logger(users);
       res.send({Users: users});
-      return users;
     });
   })
 });
 
-router.get('/:key/:lotID/:spotID', (req, res, next) => {
-  database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID).once('value', function(data){
-    console.log(data.val().vacancy);
-    var spotVacancy = data.val().vacancy;
-    console.log(req.params.spotID + ' vacancy is ' + spotVacancy);
-    res.send({Vacancy: spotVacancy});
-  });
+router.get('/getVacancy/:key/:lotID/:spotID', (req, res, next) => {
+  logger("getVacancy called");
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID).once('value', function(data){
+      var spotVacancy = data.val().vacancy;
+      logger(req.params.spotID + ' vacancy is ' + spotVacancy);
+      res.send({Vacancy: spotVacancy});
+    });
+  })
 });
 
 
