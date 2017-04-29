@@ -36,21 +36,23 @@ class SearchForm extends React.Component {
                    value={info.lastName}></input>
                 </div>
                 {/* Address */}
+                {/*Add Address field to database
                 <div className="form-group">
                   <label>Address</label>
                   <input type="text"
                    className="form-control"
                    placeholder="Address"
                    readOnly></input>
-                </div>
+                </div>*/}
                 {/* City and Zip*/}
+                {/* Add City and Zip to databse
                 <div className="form-group">
                   <label>City, Zip</label>
                   <input type="text"
                    className="form-control"
                    placeholder="City, Zip"
                    readOnly></input>
-                </div>
+                </div>*/}
                 {/* NSHE ID # */}
                 <div className="form-group">
                   <label>NSHE ID #</label>
@@ -179,13 +181,14 @@ class SearchForm extends React.Component {
                    value={info.permitType}></input>
                 </div>
                 {/* Semester */}
+                {/*Add Semester field to database
                 <div className="form-group">
                   <label>Semester</label>
                   <input type="text"
                    className="form-control"
                    readOnly
                    placeholder="Semester"></input>
-                </div>
+                </div>*/}
               </div>
             </form>
           </div>
