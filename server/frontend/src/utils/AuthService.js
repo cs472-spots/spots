@@ -30,7 +30,7 @@ class AuthService extends EventEmitter {
     this.lock.hide();
     this.setToken(authResult.idToken)
     // navigate to the home route
-    hashHistory.replace('/monitor_spots')
+    hashHistory.replace('/app/monitor_spots')
     // Async loads the user profile data
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {

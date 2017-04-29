@@ -21,13 +21,11 @@ class Register extends Component {
         email: '',
         pnum:'',
         vColor:'',
+        vYear: '',
         vLic:'',
         vMake:'',
         vModel:'',
         permitType: 'student',
-        //Page descriptors
-        pageName: "Registration",
-        pgDescription: "Students",
         //Date
         curDate: (cDate.getMonth()+1).toString() + '-' + cDate.getDate().toString() + '-' + cDate.getFullYear().toString(),
         futDate: (cDate.getMonth()+1).toString() + '-' + cDate.getDate().toString() + '-' + (cDate.getFullYear()+1).toString()
@@ -59,6 +57,7 @@ class Register extends Component {
 
     if (confirmation) {
       this.registerUser();
+      alert('User registered successfully!');
     }
     else {
       //Do nothing, allow user to fix input
@@ -84,17 +83,21 @@ class Register extends Component {
       expDate: this.state.futDate,
       type: this.state.permitType,
       vehicleInt: vInt,
+      v1_year: parseInt(this.state.vYear),
       v1_make: this.state.vMake,
       v1_model: this.state.vModel,
       v1_color: this.state.vColor,
       v1_plate: this.state.vLic,
+      v2_year: 2012,
       v2_make: "Honda",
       v2_model: "Civic",
       v2_color: "Red",
       v2_plate: "licensePlate2",
+      flag: "register"
     };
 
     if(vInt===1){
+      data.v2_year = null;
       data.v2_make = null;
       data.v2_model = null;
       data.v2_color = null;
@@ -107,10 +110,9 @@ class Register extends Component {
 
     //EXECUTION TIME!
   render() {
-    const { pageName, pgDescription } = this.state;
     return (
       <div>
-        <SearchHeader activeName={pageName} description={pgDescription} />
+        <SearchHeader activeName={this.props.pageName} description={this.props.pgDescription} />
 
         <div className="row">
           <div className="col-md-6">
@@ -121,63 +123,53 @@ class Register extends Component {
               <form role="form">
                 <div className="box-body">
                   <div className="form-group">
-                    <label>
-                      First Name:
+                    <label>First Name</label>
                       <input
                         className="form-control"
                         name="fname"
                         type="text"
                         value={this.state.fname}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Last Name:
+                    <label>Last Name</label>
                       <input
                         className="form-control"
                         name="lname"
                         type="text"
                         value={this.state.lname}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      NSHE:
+                    <label>NSHE</label>
                       <input
                         className="form-control"
                         name="NSHE"
                         type="text"
                         value={this.state.NSHE}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Email:
+                    <label>Email</label>
                       <input
                         className="form-control"
                         name="email"
                         type="email"
                         value={this.state.email}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Phone Number (i.e. 7022589201):
+                    <label>Phone Number (i.e. 7022589201)</label>
                       <input
                         className="form-control"
                         name="pnum"
                         type="text"
                         value={this.state.pnum}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
                 </div>
               </form>
@@ -194,62 +186,62 @@ class Register extends Component {
                 <div className="box-body">
 
                   <div className="form-group">
-                    <label>
-                      Color (i.e. Blue):
+                    <label>Model Year</label>
+                      <input
+                        className="form-control"
+                        name="vYear"
+                        type="text"
+                        value={this.state.vYear}
+                        onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Color (i.e. Blue)</label>
                       <input
                         className="form-control"
                         name="vColor"
                         type="text"
                         value={this.state.vColor}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Car License:
-                      <input
-                        className="form-control"
-                        name="vLic"
-                        type="text"
-                        value={this.state.vLic}
-                        onChange={this.handleChange} />
-                    </label>
-                  </div>
-
-                  <div className="form-group">
-                    <label>
-                    Car Make (i.e. Ford):
+                    <label>Car Make (i.e. Ford)</label>
                     <input
                       className="form-control"
                       name="vMake"
                       type="text"
                       value={this.state.vMake}
                       onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                    Model (i.e. Fusion):
+                    <label>Model (i.e. Fusion)</label>
                     <input
                       className="form-control"
                       name="vModel"
                       type="text"
                       value={this.state.vModel}
                       onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Permit Type:
+                    <label>License Plate #</label>
+                      <input
+                        className="form-control"
+                        name="vLic"
+                        type="text"
+                        value={this.state.vLic}
+                        onChange={this.handleChange} />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Permit Type</label>
                       <select className="form-control" name="permitType" value={this.state.permitType} onChange={this.handleChange}>
                         <option value="student">Student</option>
                         <option value="staff">Staff</option>
                         <option value="guest">Guest</option>
                       </select>
-                    </label>
                   </div>
                 </div>
               </form>
@@ -264,27 +256,23 @@ class Register extends Component {
               <form role="form">
                 <div className="box-body">
                   <div className="form-group">
-                    <label>
-                      Username:
+                    <label>Username</label>
                       <input
                         className="form-control"
                         name="uname"
                         type="text"
                         value={this.state.uname}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
 
                   <div className="form-group">
-                    <label>
-                      Card ID:
+                    <label>Card ID</label>
                       <input
                         className="form-control"
                         name="cid"
                         type="text"
                         value={this.state.cid}
                         onChange={this.handleChange} />
-                    </label>
                   </div>
                 </div>
               </form>
@@ -301,6 +289,12 @@ class Register extends Component {
   );
   }
 }
+
+Register.defaultProps = {
+  //Page descriptors
+  pageName: "Registration",
+  pgDescription: "Students"
+};
 
 const mapProps = (store) => {
   return {

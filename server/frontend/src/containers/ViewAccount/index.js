@@ -6,14 +6,13 @@ import SearchHeader from '../../components/SearchForm/searchHeader.js';
 import SearchBar from '../../components/SearchForm/searchBar.js';
 /* eslint-disable */
 
+
 class ViewAccount extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
-
-			pageName: "View Accounts",
-			pgDescription: "Staff and Students",
-			search: ''
+			search: '',
+			info: ''
 		};
 		this.viewUser= this.viewUser.bind(this);
 	}
@@ -44,25 +43,27 @@ class ViewAccount extends Component {
   	this.props.sessionSocket.emit('client', data);
     this.props.sessionSocket.on('userInfo', (info)=>{
       console.log('Listening for info');
-      alert(info);
+      console.log(info);
+			this.setState({info: info});
     });
   }
 
 	//Render Function
 	render () {
-		const { pageName, pgDescription }=this.state;
-		console.log (this.props)
-
 		return (
 			<div>
-				<SearchHeader activeName={pageName} description={pgDescription} />
+				<SearchHeader activeName={this.props.pageName} description={this.props.pgDescription} />
 				<SearchBar search={this.state.search} onClick={this.handleSubmit} handleChange={this.handleChange} />
-				<SearchForm />
+				<SearchForm info={this.state.info} />
 			</div>
 		);
 	}
-
 }
+
+ViewAccount.defaultProps = {
+	pageName: "View Accounts",
+	pgDescription: "Staff and Students"
+};
 
 const mapProps = (store) => {
   return {
