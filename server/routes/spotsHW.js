@@ -7,15 +7,48 @@ var logger = require("../src/logger");
 var SPOTS_API_KEY = process.env.SPOTS_API_KEY;
 logger("Using SPOTS_API_KEY = " + SPOTS_API_KEY)
 
+function handleApiKey(key, done) {
+  var err;
+  if(key != SPOTS_API_KEY) {
+    logger("Invalid API key received.");
+    err = new Error;
+  }
+  return done(err);
+}
+
 /*
   GET: retrieve users
 */
-router.get('/', (req, res, next) => {
-  database.ref('/UserAccounts').once('value', function(data){
-    var users = data.val();
-    logger(users);
-    res.send({Users: users});
-  });
+router.get('/getUsers/:key', (req, res, next) => {
+  logger("getUsers called");
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/UserAccounts').once('value', function(data){
+      var users = data.val();
+      logger(users);
+      res.send({Users: users});
+    });
+  })
+});
+
+router.get('/getVacancy/:key/:lotID/:spotID', (req, res, next) => {
+  logger("getVacancy called");
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID).once('value', function(data){
+      var spotVacancy = data.val().vacancy;
+      logger(req.params.spotID + ' vacancy is ' + spotVacancy);
+      res.send({Vacancy: spotVacancy});
+    });
+  })
 });
 
 
