@@ -1,4 +1,5 @@
 import {createSlice} from 'nectarine';
+import spotsObj from './tempSpots';
 
 const sessionSlice = createSlice({
   schema: (_) => {
@@ -7,6 +8,7 @@ const sessionSlice = createSlice({
         firstName: _({type: 'string'}),
         lastName: _({type: 'string'})
       },
+      spots: _({type: 'object'}),
       socket: _
     };
   },
@@ -14,6 +16,10 @@ const sessionSlice = createSlice({
   actions: {
     sample: function(guest) {
       console.log("this action does nothing");
+    },
+    getSpots: function() {
+      this.slice.spots.$set(spotsObj);
+      return this.slice.spots.$get();
     }
     //need to create an action to get profile name
     //problem is waiting for $set to finish before using $get

@@ -15,6 +15,7 @@
     "bootstrap": "^3.3.7",
     "classnames": "^2.2.5",
     "express": "^4.14.0",
+    "google-map-react": "0.24.0",
     "jwt-decode": "^2.2.0",
     "nectarine": "0.0.9",
     "react": "^15.4.2",

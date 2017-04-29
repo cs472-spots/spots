@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SearchHeader from '../../components/SearchForm/searchHeader.js';
+import SpotsMap from '../../components/SpotsMap';
 import { connect } from 'nectarine';
 
 class MonitorSpots extends Component {
