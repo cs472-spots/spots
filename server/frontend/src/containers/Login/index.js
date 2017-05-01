@@ -2,6 +2,7 @@
 import React, { Component, PropTypes as T } from 'react';
 import { connect } from 'nectarine';
 
+import SpotsMap from '../../components/SpotsMap';
 import AuthService from '../../utils/AuthService';
 import logo from './../../assets/logo.png';
 
@@ -15,11 +16,7 @@ class Login extends Component {
     const { auth } = this.props;
     auth.lock.show();
     return (
-      <div>
-        <div>
-          <img role="presentation" src={logo}/>
-        </div>
-      </div>
+      <SpotsMap/>
     );
   }
 }
