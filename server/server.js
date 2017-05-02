@@ -36,7 +36,7 @@ app.get('/', function(request, response) {
 io.on('connection', (socket) => {
   logger("Client connected - " + socket.id);
 
-  socket.on('client', (data) => {
+  socket.on('client', (data, response) => {
     var userProfile = data;
     switch(data.client){
       case 'Admin':
@@ -54,6 +54,14 @@ io.on('connection', (socket) => {
           case 'viewUser':
             viewUser(userProfile.userID);
             break;
+          case 'get-spots':
+            console.log("LOOKING FOR THE SPOTS!!!");
+            var spotsRef = database.ref('Spots/LB');
+            spotsRef.once('value', (snapshot) => {
+              const spots = snapshot.val();
+              console.log(spots);
+              response(spots);
+            })
         }
         break;
       case 'Mobile':
