@@ -1,5 +1,6 @@
 //src/containers/Login/index.js
-import React, { Component, PropTypes as T } from 'react';
+import React, { Component } from 'react';
+import T from 'prop-types';
 import { connect } from 'nectarine';
 
 import SpotsMap from '../../components/SpotsMap';
