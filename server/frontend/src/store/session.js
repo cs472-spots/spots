@@ -1,5 +1,4 @@
 import {createSlice} from 'nectarine';
-import spotsObj from './tempSpots';
 
 const sessionSlice = createSlice({
   schema: (_) => {
@@ -18,7 +17,13 @@ const sessionSlice = createSlice({
       console.log("this action does nothing");
     },
     setSpots: function () {
-      this.slice.spots.$set(spotsObj);
+      if(!!!this.slice.socket.$hasData()) {
+        return new Error("socket is not set");
+      }
+      var socket = this.slice.socket.$get()
+      socket.emit('client', {client:'Admin', flag:'get-spots'}, (spots) => {
+        this.slice.spots.$set(spots);
+      })
     },
     getSpots: function() {
       return this.slice.spots.$get();

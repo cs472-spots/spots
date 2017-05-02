@@ -26,13 +26,9 @@ class SpotsMap extends Component {
     zoom: 20
   };
 
-  constructor () {
-    super();
-  }
-
   renderSpots = () => {
     if (this.props.spots === null){
-      this.props.setSpots();
+      return null;
     }
     var spots = this.props.getSpots()
     var renderedSpots = Object.keys(spots).map((key, index) => {
@@ -47,7 +43,11 @@ class SpotsMap extends Component {
     return renderedSpots;
   }
 
-  render() {
+  componentDidMount() {
+    this.props.setSpots();
+  }
+
+   render() {
     return (
       <GoogleMapReact
         bootstrapURLKeys={{key: 'AIzaSyDBvguT8pFWdDPHafS-vRjHiFEWgYNSkQ8'}}

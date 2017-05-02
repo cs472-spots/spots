@@ -30,11 +30,8 @@ class App extends Component {
     this.setState({sidebarOpen: !this.state.sidebarOpen});
   }
 
-  componentDidMount () {
-    this.props.setSocket(SocketIOClient(location.origin));
-  }
-
   componentWillMount () {
+      this.props.setSocket(SocketIOClient(location.origin));
       document.body.style.background = "#222d32";
   }
 
