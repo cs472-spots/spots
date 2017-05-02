@@ -5,7 +5,7 @@ class Spot extends Component {
 
   render() {
     return (
-      <div style={Style.notVacant} className={this.props.$hover? 'cursor-hover' : null}>
+      <div style={this.props.vacancy ? Style.Vacant : Style.notVacant} className={this.props.$hover? 'cursor-hover' : null}>
         <div className={this.props.showBalloon ? 'balloon open' : 'balloon'}>
           <div onClick={this.props.onClick} className="fa fa-times-circle-o circle-x"/>
           <div className='balloon-content'>
@@ -16,7 +16,7 @@ class Spot extends Component {
               <strong>Name:</strong><br/>
               <strong>Valid:</strong> {this.props.authorized}<br/>
               <strong>Type:</strong> {this.props.type}<br/>
-              <strong>Vacancy:</strong> {this.props.vacancy}<br/>
+              <strong>Vacancy:</strong> {this.props.vacancy.toString()}<br/>
             </div>
           </div>
         </div>
