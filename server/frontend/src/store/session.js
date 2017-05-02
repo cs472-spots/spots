@@ -9,7 +9,8 @@ const sessionSlice = createSlice({
         lastName: _({type: 'string'})
       },
       spots: _({type: 'object'}),
-      socket: _
+      socket: _,
+      spotIndex: _({type: 'number'})
     };
   },
 
