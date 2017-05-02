@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoogleMapReact, { InfoWindow } from 'google-map-react';
+import GoogleMapReact from 'google-map-react';
 import { connect } from 'nectarine';
 
 import Spot from './Spot';
