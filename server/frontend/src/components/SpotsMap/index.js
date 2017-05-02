@@ -16,15 +16,31 @@ function createMapOptions (maps) {
       mapTypeControlOptions: {
             position: maps.ControlPosition.TOP_RIGHT
           },
-      mapTypeControl: true
+      mapTypeControl: false
     };
 }
+
 
 class SpotsMap extends Component {
   static defaultProps = {
     center: {lat: LAT, lng: LNG},
     zoom: 20
   };
+
+  constructor () {
+    super();
+    this.state = {
+      showBalloon: false
+    }
+  }
+
+  _onChildClick = (key, childProps) => {
+    this.props.setSpotIndex(parseInt(key));
+  }
+
+  onClose = () => {
+    this.props.setSpotIndex(-1);
+  }
 
   renderSpots = () => {
     if (this.props.spots === null){
@@ -36,6 +52,9 @@ class SpotsMap extends Component {
         <Spot
           key={index}
           {...spots[key]}
+          index={index}
+          showBalloon={(index === (this.props.spotIndex))}
+          onClick={this.onClose}
         />
       );
     });
@@ -53,9 +72,10 @@ class SpotsMap extends Component {
         bootstrapURLKeys={{key: 'AIzaSyDBvguT8pFWdDPHafS-vRjHiFEWgYNSkQ8'}}
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}
-        onClick={(e) => console.log(`(${e.lat}, ${e.lng})`)}
+        onChildClick={this._onChildClick}
         options={createMapOptions}
-        style={{cursor:'pointer'}}
+        style={{cursor:'default'}}
+        hoverDistance={15 /*Change this value, in example K_CIRCLE_SIZE/2 ?*/}
       >
         {this.renderSpots()}
       </GoogleMapReact>
@@ -67,7 +87,9 @@ const mapProps = (store) => {
   return {
     spots: store.sessionSlice.spots.$get(),
     setSpots: store.sessionSlice.setSpots,
-    getSpots: store.sessionSlice.getSpots
+    getSpots: store.sessionSlice.getSpots,
+    setSpotIndex: (index) => store.sessionSlice.spotIndex.$set(index),
+    spotIndex: store.sessionSlice.spotIndex.$get()
   }
 }
 

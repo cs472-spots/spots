@@ -471,6 +471,22 @@ a.sidebar-menu-item:visited {
 /* ========================================================================= */
 /* ========================================================================= */
 /* ========================== SPOTS MAP ============================== */
+.circle-x {
+  position: absolute;
+  left: 278px;
+  top: 4px;
+}
+
+.cursor-hover {
+  cursor: pointer;
+}
+
+.balloon {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
 .map-content {
   position: absolute;
   min-height: 90%;
@@ -480,4 +496,52 @@ a.sidebar-menu-item:visited {
   top: 50px;
   transition: left .2s ease-in-out;
   background-color: #F8F8FF;
+}
+
+.balloon {
+  border-radius: 5px 20px 20px 20px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  width: 300px;
+  height: 0px;
+  top: 12px;
+  opacity: 0.2;
+  background-color: #fafafa;
+  font: 1em 'Open Sans';
+  line-height: 30px;
+  color: #345;
+  overflow: hidden;
+  z-index: 1001;
+  cursor: pointer;
+}
+.balloon.open {
+  height: 110px;
+  opacity: 1;
+  -moz-box-shadow:    3px 4px 2px 3px #999;
+  -webkit-box-shadow: 3px 4px 2px 3px #999;
+  box-shadow:         3px 4px 2px 3px #999;
+}
+.balloon-content {
+  background-color: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.balloon-content.header {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.balloon-content.content {
+  text-align: left;
+  font-size: 12px;
+  padding-top: 0;
+  padding-left: 10px;
+  margin-top: -25px;
+}
+
+br {
+  display: block;
+  margin-top: -15px;
+  line-height: -15px;
+  content: " "
 }
