@@ -35,7 +35,7 @@ class SpotsMap extends Component {
   }
 
   _onChildClick = (key, childProps) => {
-    this.props.setSpotIndex(parseInt(key));
+    this.props.setSpotIndex(parseInt(key, 10));
   }
 
   onClose = () => {

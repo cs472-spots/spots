@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Style from './Styles';
-import { connect } from 'nectarine';
 
 class Spot extends Component {
-  constructor (props) {
-    super(props);
-  }
 
   render() {
     return (

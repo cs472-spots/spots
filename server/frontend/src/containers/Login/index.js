@@ -4,7 +4,6 @@ import { connect } from 'nectarine';
 
 import SpotsMap from '../../components/SpotsMap';
 import AuthService from '../../utils/AuthService';
-import logo from './../../assets/logo.png';
 
 class Login extends Component {
   static propTypes = {
