@@ -10,9 +10,9 @@ class HeaderBar extends React.Component {
         {
           // Spots logo
         }
-        <div className="navbar-logo">
-          <b>Admin</b>SPOTS
-        </div>
+        <a href="#/app/monitor_spots" className="navbar-logo">
+            <b>Admin</b>SPOTS
+        </a>
         {
           // Navigation bar
         }
@@ -26,7 +26,7 @@ class HeaderBar extends React.Component {
           }
           <div>
             <a href="#" className="navbar-admin">
-              <img src="img/jedi.jpg" className="navbar-admin-image"></img>
+              <img src="img/hey_reb.png" className="navbar-admin-image"></img>
               <span>{ profile.name }</span>
             </a>
           </div>

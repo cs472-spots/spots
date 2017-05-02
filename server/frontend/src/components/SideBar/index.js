@@ -14,7 +14,7 @@ class SideBar extends React.Component {
           }
           <div className="user-panel">
             <div className="user-pull-left">
-              <img role="presentation" src="img/jedi.jpg" className="user-panel-image"></img>
+              <img role="presentation" src="img/hey_reb.png" className="user-panel-image"></img>
             </div>
             <div className="user-pull-left-info">
               <p>Hello { profile.name }</p>
@@ -30,25 +30,31 @@ class SideBar extends React.Component {
           <li className="sidebar-menu-header">MAIN NAVIGATION</li>
           <li>
             <a href="#/app/register" className="sidebar-menu-item">
-              <i className="fa fa-edit"></i>
+              <i className="fa fa-user-plus"></i>
               <span className="sidebar-menu-item-text">Register Students</span>
             </a>
           </li>
           <li>
             <a href="#/app/view_accounts" className="sidebar-menu-item">
-              <i className="fa fa-book"></i>
+              <i className="fa fa-users"></i>
               <span className="sidebar-menu-item-text">View Accounts</span>
             </a>
           </li>
           <li>
+            <a href="#/app/manage_accounts" className="sidebar-menu-item">
+              <i className="fa fa-edit"></i>
+              <span className="sidebar-menu-item-text">Manage Accounts</span>
+            </a>
+          </li>
+          <li>
             <a href="#/app/monitor_spots" className="sidebar-menu-item">
-              <i className="fa fa-laptop"></i>
+              <i className="fa fa-automobile"></i>
               <span className="sidebar-menu-item-text">Monitor Spots</span>
             </a>
           </li>
           <li>
             <a href="#/app/login" onClick={this.props.onClick} className="sidebar-menu-item">
-              <i className="fa fa-laptop"></i>
+              <i className="fa fa-sign-out"></i>
               <span className="sidebar-menu-item-text">Logout</span>
             </a>
           </li>

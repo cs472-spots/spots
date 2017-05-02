@@ -8,6 +8,7 @@ import { Router,
 import App from '../containers/App';
 import Error404 from '../containers/Error404';
 import Login from '../containers/Login';
+import ManageAccounts from '../containers/ManageAccounts';
 import Maps from '../containers/Maps';
 import MonitorSpots from '../containers/MonitorSpots';
 import Register from '../containers/Register';
@@ -31,6 +32,7 @@ const Routes = () => (
       <Route path="login" component={Login} />
       <Route path="register" component={Register} onEnter={requireAuth}/>
       <Route path="view_accounts" component={ViewAccount} onEnter={requireAuth}/>
+      <Route path="manage_accounts" component={ManageAccounts} onEnter={requireAuth}/>
       <Route path="monitor_spots" component={MonitorSpots} onEnter={requireAuth}/>
       <Route path="*" component={Error404}/>
     </Route>

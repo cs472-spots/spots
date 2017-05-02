@@ -1,6 +1,15 @@
 import React from 'react';
 
 class SearchHeader extends React.Component {
+  isHome (activeName) {
+    if (activeName === "Monitor Spots") {
+      return null;
+    }
+    else {
+      return <li className="active">{activeName}</li>
+    }
+  }
+
   render() {
     const { activeName, description } = this.props;
     return (
@@ -12,11 +21,9 @@ class SearchHeader extends React.Component {
         <ol className="breadcrumb">
           <li>
             <i className="fa fa-book"></i>
-            <span className="space-left">Home</span>
+            <a href="#/app/monitor_spots"><span className="space-left">Home</span></a>
           </li>
-          <li className="active">
-            {activeName}
-          </li>
+          {this.isHome(activeName)}
         </ol>
       </div>
     )

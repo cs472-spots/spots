@@ -33,7 +33,7 @@ class SearchBar extends React.Component {
        {/**/}
        <div className="w3-xlarge">
        <div onClick={this.props.onClick}
-        className="fa fa-search searchIcon"></div></div>
+        className="fa fa-search searchIcon fa-2x"/></div>
       </div>
     )
   }

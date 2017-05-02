@@ -61,7 +61,7 @@ class App extends Component {
           //<SideBar isOpen={this.state.sidebarOpen} toggleSidebar={this.handleViewSidebar}/>
         }
         <SideBar onClick={this.logout.bind(this)} isOpen={this.props.route.auth.loggedIn() ? this.state.sidebarOpen : false} profile={profile}/>
-        <div className={contentClass}>
+        <div className={this.props.route.auth.loggedIn() ? contentClass : 'content'}>
           {children}
         </div>
       </div>

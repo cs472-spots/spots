@@ -26,7 +26,14 @@ class SpotsMap extends Component {
     zoom: 20
   };
 
+  constructor () {
+    super();
+  }
+
   renderSpots = () => {
+    if (this.props.spots === null){
+      this.props.setSpots();
+    }
     var spots = this.props.getSpots()
     var renderedSpots = Object.keys(spots).map((key, index) => {
       return (
@@ -58,6 +65,8 @@ class SpotsMap extends Component {
 
 const mapProps = (store) => {
   return {
+    spots: store.sessionSlice.spots.$get(),
+    setSpots: store.sessionSlice.setSpots,
     getSpots: store.sessionSlice.getSpots
   }
 }

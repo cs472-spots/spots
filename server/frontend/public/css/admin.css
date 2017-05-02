@@ -24,6 +24,30 @@ header {
   background-color: #008c4c;
 }
 
+a.navbar-logo:link {
+  color: white;
+  cursor: default;
+  text-decoration: none;
+}
+
+a.navbar-logo:hover {
+  color: white;
+  cursor: default;
+  text-decoration: none;
+}
+
+a.navbar-logo:visited {
+  color: white;
+  text-decoration: none;
+  cursor: default;
+}
+
+a.navbar-logo:active {
+  color:white;
+  text-decoration: none;
+  cursor: default;
+}
+
 /* TOP NAVIGATION */
 /* navigation bar */
 .navbar {
@@ -239,7 +263,7 @@ a.sidebar-menu-item:visited {
 /* content */
 .content {
   position: absolute;
-  min-height: 250px;
+  min-height: 100%;
   padding: 15px;
   left: 0;
   right: 0;
@@ -337,7 +361,7 @@ a.sidebar-menu-item:visited {
   position: absolute;
   color: #444;
   right: 50px;
-  margin-top: -8px;
+  margin-top: -12px;
   cursor: pointer;
 }
 
@@ -442,4 +466,18 @@ a.sidebar-menu-item:visited {
   background-color: white;
   border: 1px solid #ccc;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* ========================== SPOTS MAP ============================== */
+.map-content {
+  position: absolute;
+  min-height: 90%;
+  padding: 15px;
+  left: 10px;
+  right: 10px;
+  top: 50px;
+  transition: left .2s ease-in-out;
+  background-color: #F8F8FF;
 }
