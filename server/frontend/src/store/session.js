@@ -14,9 +14,6 @@ const sessionSlice = createSlice({
   },
 
   actions: {
-    sample: function(guest) {
-      console.log("this action does nothing");
-    },
     setSpots: function () {
       if(!!!this.slice.socket.$hasData()) {
         return new Error("socket is not set");
