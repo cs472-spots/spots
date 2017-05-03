@@ -235,7 +235,7 @@ function viewUser(userID){
       if(snapshot.val().permit != null){
         userInfo.permitType = snapshot.val().permit.type;
         userInfo.purchaseDate = snapshot.val().permit.purchaseDate;
-        userInfo.expDate = snapshot.val().expDate;
+        userInfo.expDate = snapshot.val().permit.expDate;
 
         if(snapshot.val().vehicles !=null){
           //userInfo.v1_year = snapshot.val().vehicles.v1.year;

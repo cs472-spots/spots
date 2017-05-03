@@ -56,13 +56,39 @@ class Register extends Component {
       'Expire Date: ' + this.state.futDate )
 
     if (confirmation) {
-      this.registerUser();
-      alert('User registered successfully!');
+      if (this.checkUser(this.state.NSHE)) {
+        this.registerUser();
+        alert('User registered successfully!');
+      }
+      else {
+        alert(this.state.NSHE + ' already exists!\n\nNo account created.');
+      }
     }
     else {
       //Do nothing, allow user to fix input
     }
     event.preventDefault();
+  }
+
+  checkUser(userID){
+    console.log('Requested to view a user');
+    var data = {
+      client: "Admin",
+      flag: "viewUser",
+      userID: parseInt(userID)
+    }
+
+  	this.props.sessionSocket.emit('client', data);
+    this.props.sessionSocket.on('userInfo', (info)=>{
+      console.log('Listening for info');
+      console.log(info);
+			if (info === null) {
+				return true;
+			}
+			else {
+				return false;
+			}
+    });
   }
 
   registerUser(){
@@ -118,7 +144,7 @@ class Register extends Component {
           <div className="col-md-6">
             <div className="box box-primary">
               <div className="box-header">
-                <h3 className="box-title">New Student Information</h3>
+                <h3 className="box-title">New Patron Information</h3>
               </div>
               <form role="form">
                 <div className="box-body">
@@ -186,7 +212,7 @@ class Register extends Component {
                 <div className="box-body">
 
                   <div className="form-group">
-                    <label>Model Year</label>
+                    <label>Year</label>
                       <input
                         className="form-control"
                         name="vYear"
@@ -234,15 +260,6 @@ class Register extends Component {
                         value={this.state.vLic}
                         onChange={this.handleChange} />
                   </div>
-
-                  <div className="form-group">
-                    <label>Permit Type</label>
-                      <select className="form-control" name="permitType" value={this.state.permitType} onChange={this.handleChange}>
-                        <option value="student">Student</option>
-                        <option value="staff">Staff</option>
-                        <option value="guest">Guest</option>
-                      </select>
-                  </div>
                 </div>
               </form>
             </div>
@@ -251,20 +268,10 @@ class Register extends Component {
           <div className="col-md-12">
             <div className="box box-office-use">
               <div className="box-header">
-                <h3 className="box-title">Account Information</h3>
+                <h3 className="box-title">Permit Information</h3>
               </div>
               <form role="form">
                 <div className="box-body">
-                  <div className="form-group">
-                    <label>Username</label>
-                      <input
-                        className="form-control"
-                        name="uname"
-                        type="text"
-                        value={this.state.uname}
-                        onChange={this.handleChange} />
-                  </div>
-
                   <div className="form-group">
                     <label>Card ID</label>
                       <input
@@ -273,6 +280,15 @@ class Register extends Component {
                         type="text"
                         value={this.state.cid}
                         onChange={this.handleChange} />
+                  </div>
+                  {/* Permit Information */}
+                  <div className="form-group">
+                    <label>Permit Type</label>
+                      <select className="form-control" name="permitType" value={this.state.permitType} onChange={this.handleChange}>
+                        <option value="student">Student</option>
+                        <option value="staff">Staff</option>
+                        <option value="guest">Guest</option>
+                      </select>
                   </div>
                 </div>
               </form>

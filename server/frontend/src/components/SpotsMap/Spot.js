@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Style from './Styles';
 
 class Spot extends Component {
-
   render() {
     var spotColor = this.props.vacancy ? 'yellow' : 'green';
     spotColor = this.props.authorized ? spotColor : 'red';
