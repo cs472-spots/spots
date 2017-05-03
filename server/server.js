@@ -146,6 +146,7 @@ function registerUser(userProfile){
         make: userProfile.v1_make,
         model: userProfile.v1_model,
         color: userProfile.v1_color,
+        year: userProfile.v1_year,
         licensePlate: userProfile.v1_plate
       });
       if(userProfile.vehicleInt===2){
@@ -154,6 +155,7 @@ function registerUser(userProfile){
           make: userProfile.v2_make,
           model: userProfile.v2_model,
           color: userProfile.v2_color,
+          year: userProfile.v2_year,
           licensePlate: userProfile.v2_plate
         });
       }
