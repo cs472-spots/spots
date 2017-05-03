@@ -13,7 +13,12 @@ import {
     Keyboard, 
     KeyboardAvoidingView } from 'react-native';
 import Main from './Main';
-import * as firebase from "firebase";
+window.navigator.userAgent = 'ReactNative';
+
+const io = require('socket.io-client/dist/socket.io');
+const socket = io('https://cs472-spots.herokuapp.com/', {
+  transports: ['websocket']
+});
 
 export default class Login extends Component {
 

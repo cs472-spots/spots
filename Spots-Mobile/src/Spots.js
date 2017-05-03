@@ -47,7 +47,7 @@ export default class Spots extends Component {
             case 'Register':
                 return (<Register navigator={navigator} title="Register"/>)
             case 'Main':
-                return (<Main navigator={navigator} title="Main" firstname={route.firstname} />)
+                return (<Main navigator={navigator} title="Main" fname={route.fname} />)
             case 'CheckIn':
                 return (<CheckIn navigator={navigator} title="CheckIn"/>)
         }

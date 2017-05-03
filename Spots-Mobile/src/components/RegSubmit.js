@@ -1,4 +1,4 @@
-// Register Screen JS code
+// Register Screen 2 JS code
 
 import React, { Component } from 'react';
 import { 
@@ -14,26 +14,27 @@ import {
     Keyboard, 
     KeyboardAvoidingView } from 'react-native';
 import BottomNav from './BottomNav'; 
+import Register from './Register';
 import Main from './Main';
 import io from 'socket.io-client/dist/socket.io';
 
 window.navigator.userAgent = 'ReactNative';
 
-export default class Register extends Component {
+export default class RegSubmit extends Component {
 
     constructor(props) {
         super(props);
         this.socket = io('https://unlv-spots.herokuapp.com/', {jsonp: false});
         this.state = {
             //Account Information
-            uname: '',
+            uname: this.props.uname,
             cid: '',
             //Student Information
-            fname: '',
-            lname: '',
+            fname: this.props.fname,
+            lname: this.props.lname,
             NSHE:'',
-            email: '',
-            pnum:'',
+            email: this.props.email,
+            pnum:this.props.pnum,
             vColor:'',
             vYear: '',
             vLic:'',
@@ -75,11 +76,13 @@ export default class Register extends Component {
 
     registerCheck(state) {
         if(
-            state.fname==''||
-            state.lname==''||
-            state.uname==''||
-            state.password==''||
-            state.email=='') {
+            state.cid==''||
+            state.NSHE==''||
+            state.vColor==''||
+            state.vYear==''||
+            state.vLic=='' ||
+            state.vMake=='' ||
+            state.vModel =='') {
             this.setState({showError: true});
         } else {
             this.setState({showError: false});
@@ -93,7 +96,6 @@ export default class Register extends Component {
     }
 
     Register(state) {
-        this.socket.emit('hello', "Hello World");
         this.socket.emit('client', this.data);
         this.socket.on('reply', (msg)=> {
         console.log('Message: ' + msg);
@@ -108,58 +110,70 @@ export default class Register extends Component {
                 <Image
                 source={require('./images/register_bg.png')}
                 style={styles.registerForm}>
+                    <Text>
+                        Welcome, {this.state.fname}
+                    </Text>
                     <Text style={styles.error}>{msg}</Text>
                     <TextInput 
-                        onChange={(event) => this.setState({fname: event.nativeEvent.text})}
-                        placeholder="first name *"
-                        onSubmitEditing={() => this.lastnameInput.focus()}
+                        onChange={(event) => this.setState({cid: event.nativeEvent.text})}
+                        placeholder="card id *"
+                        onSubmitEditing={() => this.NSHEInput.focus()}
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
                     />
                     <TextInput 
-                        onChange={(event) => this.setState({lname: event.nativeEvent.text})}
-                        placeholder="last name *"
-                        onSubmitEditing={() => this.usernameInput.focus()}
+                        onChange={(event) => this.setState({NSHE: event.nativeEvent.text})}
+                        placeholder="NSHE number *"
+                        onSubmitEditing={() => this.vLicInput.focus()}
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        ref={(input) => this.lastnameInput = input}
+                        ref={(input) => this.NSHEInput = input}
                     />
                     <TextInput 
-                        onChange={(event) => this.setState({uname: event.nativeEvent.text})}
-                        placeholder="username *"
-                        onSubmitEditing={() => this.passwordInput.focus()}
+                        onChange={(event) => this.setState({vLic: event.nativeEvent.text})}
+                        placeholder="licence plate number *"
+                        onSubmitEditing={() => this.vColInput.focus()}
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        ref={(input) => this.usernameInput = input}
+                        ref={(input) => this.vLicInput = input}
                     />
                     <TextInput 
-                        onChange={(event) => this.setState({password: event.nativeEvent.text})}
-                        placeholder="password *"
-                        onSubmitEditing={() => this.emailInput.focus()}
-                        secureTextEntry
-                        style={styles.input}
-                        ref={(input) => this.passwordInput = input}
-                    />
-                    <TextInput 
-                        onChange={(event) => this.setState({email: event.nativeEvent.text})}
-                        placeholder="email address *"
-                        onSubmitEditing={() => this.phoneInput.focus()}
-                        keyboardType="email-address"
+                        onChange={(event) => this.setState({vColor: event.nativeEvent.text})}
+                        placeholder="vehicle color *"
+                        onSubmitEditing={() => this.vMakeInput.focus()}
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        ref={(input) => this.emailInput = input}
+                        ref={(input) => this.vColInput = input}
                     />
                     <TextInput 
-                        onChange={(event) => this.setState({pnum: event.nativeEvent.text})}
-                        placeholder="phone numer "
+                        onChange={(event) => this.setState({vMake: event.nativeEvent.text})}
+                        placeholder="vehicle make *"
+                        onSubmitEditing={() => this.vModInput.focus()}
                         autoCapitalize="none"
                         autoCorrect={false}
                         style={styles.input}
-                        ref={(input) => this.phoneInput = input}
+                        ref={(input) => this.vMakeInput = input}
+                    />
+                    <TextInput 
+                        onChange={(event) => this.setState({vModel: event.nativeEvent.text})}
+                        placeholder="vehicle model *"
+                        onSubmitEditing={() => this.vYearInput.focus()}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        style={styles.input}
+                        ref={(input) => this.vModInput = input}
+                    />
+                    <TextInput 
+                        onChange={(event) => this.setState({vYear: event.nativeEvent.text})}
+                        placeholder="vehicle year *"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        style={styles.input}
+                        ref={(input) => this.vYearInput = input}
                     />
                     <TouchableOpacity onPress={() => {this.registerCheck(this.state)}}>
                         <View style={styles.registerButton}>
@@ -206,4 +220,4 @@ const styles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent('Register', () => Register);
+AppRegistry.registerComponent('RegSubmit', () => RegSubmit);

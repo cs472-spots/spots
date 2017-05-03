@@ -19,7 +19,7 @@ export default class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: this.props.firstname
+            fname: this.props.fname
         }
     }   
 
@@ -35,7 +35,7 @@ export default class Main extends Component {
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.h1}>
-                        Welcome, {this.state.firstname}
+                        Welcome, {this.state.fname}
                     </Text>
                 </View>
                 <View style={styles.mainNav}>

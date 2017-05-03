@@ -8,17 +8,29 @@ import {
     Image, 
     Text } from 'react-native';
 import BottomNav from './BottomNav';
-import MapView from 'react-native-maps'
+import MapView from 'react-native-maps';
+window.navigator.userAgent = 'ReactNative';
+
+const io = require('socket.io-client/dist/socket.io');
+const socket = io('https://unlv-spots.herokuapp.com/', {
+  transports: ['websocket']
+});
 
 export default class CheckIn extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            free: 3,
-            total: 6
+            free: '',
+            total: 100
         }
     }   
+
+    RecieveSpots () {
+        this.socket.on('reply', (spots)=> {
+            
+        })
+    }
 
     render() {
 
@@ -35,8 +47,8 @@ export default class CheckIn extends Component {
                 <MapView
                     style={styles.map}
                     initialRegion={{
-                        latitude: 36.106611,
-                        longitude: -115.144398,
+                        latitude: 36.111603,
+                        longitude: -115.141534,
                         latitudeDelta: 0.0922,
                         longitudeDelta: 0.0421,
                     }}
