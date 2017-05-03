@@ -50,6 +50,7 @@ class SideBar extends React.Component {
             <a href="#/app/monitor_spots" className="sidebar-menu-item">
               <i className="fa fa-automobile"></i>
               <span className="sidebar-menu-item-text">Monitor Spots</span>
+              <div className={(this.props.notifications > 0) ? 'badge-num' : null}>{this.props.notifications}</div>
             </a>
           </li>
           <li>

@@ -12,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       sidebarOpen: true,
-      profile: this.props.route.auth.getProfile()
+      profile: this.props.route.auth.getProfile(),
+      intervalId: ''
     };
     this.props.route.auth.on ('profile_updated', (newProfile) => {
       this.setState ({profile: newProfile});
@@ -30,14 +31,25 @@ class App extends Component {
     this.setState({sidebarOpen: !this.state.sidebarOpen});
   }
 
-
   componentWillMount () {
       this.props.setSocket(SocketIOClient(location.origin));
+      setTimeout (this.props.setNotify, 10000);
+      var intervalId = setInterval(this.updateSpots, 60000);
+      this.setState ({
+        intervalId: intervalId
+      })
       document.body.style.background = "#222d32";
   }
 
   componentWillUnmount () {
       document.body.style.background = null;
+      clearInterval (this.state.intervalId);
+  }
+
+  updateSpots = () => {
+    this.props.setSpots();
+    this.props.setNotify();
+    console.log (this.props.notifications);
   }
 
   //Render Function
@@ -58,7 +70,7 @@ class App extends Component {
         {
           //<SideBar isOpen={this.state.sidebarOpen} toggleSidebar={this.handleViewSidebar}/>
         }
-        <SideBar onClick={this.logout.bind(this)} isOpen={this.props.route.auth.loggedIn() ? this.state.sidebarOpen : false} profile={profile}/>
+        <SideBar onClick={this.logout.bind(this)} isOpen={this.props.route.auth.loggedIn() ? this.state.sidebarOpen : false} profile={profile} notifications={this.props.notifications}/>
         <div className={this.props.route.auth.loggedIn() ? contentClass : 'content'}>
           {children}
         </div>
@@ -70,7 +82,10 @@ class App extends Component {
 
 const mapProps = (store, ownProps) => {
   return {
-    setSocket: (socket) => store.sessionSlice.socket.$set(socket)
+    setSocket: (socket) => store.sessionSlice.socket.$set(socket),
+    setSpots: store.sessionSlice.setSpots,
+    setNotify: store.sessionSlice.setNotify,
+    notifications: store.sessionSlice.notifications.$get()
   }
 }
 

@@ -17,7 +17,7 @@ class Spot extends Component {
             </div>
             <div className='balloon-content content'>
               <strong>Name:</strong><br/>
-              <strong>Authorized:</strong> {this.props.authorized}<br/>
+              <strong>Authorized:</strong> {this.props.authorized.toString()}<br/>
               <strong>Type:</strong> {this.props.type}<br/>
               <strong>Vacancy:</strong> {this.props.vacancy.toString()}<br/>
             </div>

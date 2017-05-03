@@ -164,19 +164,19 @@ class SearchForm extends React.Component {
               <div className="box-body">
                 {/* Parking Sticker # */}
                 <div className="form-group">
-                  <label>Parking Sticker #</label>
+                  <label>Card ID #</label>
                   <input type="text"
                    className="form-control"
-                   placeholder="Parking Sticker Number"
+                   placeholder="Card ID #"
                    readOnly
                    value={info.cardid}></input>
                 </div>
                 {/* Type Of Sticker */}
                 <div className="form-group">
-                  <label>Type Of Sticker</label>
+                  <label>Permit Type</label>
                   <input type="text"
                    className="form-control"
-                   placeholder="Type Of Sticker"
+                   placeholder="Permit Type"
                    readOnly
                    value={info.permitType}></input>
                 </div>
