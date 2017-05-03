@@ -1,9 +1,18 @@
 import React from 'react';
 
 class SearchForm extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      info: {
+        firstName: ''
+      }
+    }
+  }
+
   render() {
     const { info } = this.props;
-
     return (
       <div className="row">
         {/* Left column */}
@@ -23,7 +32,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="First Name"
-                   value={info.firstName}></input>
+                   name="firstName"
+                   value={info.firstName}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* LastName */}
                 <div className="form-group">
@@ -31,7 +42,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Last Name"
-                   value={info.lastName}></input>
+                   name="lastName"
+                   value={info.lastName}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Address */}
                 {/*Add Address field to database
@@ -53,11 +66,23 @@ class SearchForm extends React.Component {
                 </div>*/}
                 {/* NSHE ID # */}
                 <div className="form-group">
-                  <label>NSHE ID #</label>
+                  <label>NSHE ID</label>
                   <input type="text"
                    className="form-control"
-                   placeholder="NSHE ID Number"
-                   value={info.userID}></input>
+                   placeholder="NSHE"
+                   name="userID"
+                   value={info.userID}
+                   onChange={this.props.userChange}></input>
+                </div>
+                {/* E-mail address*/}
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="text"
+                   className="form-control"
+                   placeholder="Email"
+                   name="email"
+                   value={info.email}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Phone # */}
                 <div className="form-group">
@@ -65,7 +90,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Phone Number"
-                   value={info.phone}></input>
+                   name="phone"
+                   value={info.phone}
+                   onChange={this.props.userChange}></input>
                 </div>
               </div>
             </form>
@@ -81,19 +108,23 @@ class SearchForm extends React.Component {
               <div className="box-body">
                 {/* Parking Sticker # */}
                 <div className="form-group">
-                  <label>Parking Sticker #</label>
+                  <label>Card ID #</label>
                   <input type="text"
                    className="form-control"
-                   placeholder="Parking Sticker Number"
-                   value={info.cardid}></input>
+                   placeholder="Card ID #"
+                   name="cardid"
+                   value={info.cardid}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Type Of Sticker */}
                 <div className="form-group">
-                  <label>Type Of Sticker</label>
+                  <label>Permit Type</label>
                   <input type="text"
                    className="form-control"
-                   placeholder="Type Of Sticker"
-                   value={info.permitType}></input>
+                   placeholder="Permit Type"
+                   name="permitType"
+                   value={info.permitType}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Semester */}
                 {/*Add Semester field to database
@@ -126,7 +157,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Year"
-                   /*value={info.v1_year}*/></input>
+                   name="v1_year"
+                   /*value={info.v1_year}*/
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Make */}
                 <div className="form-group">
@@ -134,7 +167,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Make"
-                   value={info.v1_make}></input>
+                   name="v1_make"
+                   value={info.v1_make}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Model */}
                 <div className="form-group">
@@ -142,7 +177,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Model"
-                   value={info.v1_model}></input>
+                   name="v1_model"
+                   value={info.v1_model}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* Color */}
                 <div className="form-group">
@@ -150,7 +187,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="Color"
-                   value={info.v1_color}></input>
+                   name="v1_color"
+                   value={info.v1_color}
+                   onChange={this.props.userChange}></input>
                 </div>
                 {/* License Plate # */}
                 <div className="form-group">
@@ -158,7 +197,9 @@ class SearchForm extends React.Component {
                   <input type="text"
                    className="form-control"
                    placeholder="License Plate Number"
-                   value={info.v1_plate}></input>
+                   name="v1_plate"
+                   value={info.v1_plate}
+                   onChange={this.props.userChange}></input>
                 </div>
               </div>
             </form>

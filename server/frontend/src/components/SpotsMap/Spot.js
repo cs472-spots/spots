@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Style from './Styles';
 
 class Spot extends Component {
-
   render() {
     return (
       <div style={this.props.vacancy ? Style.Vacant : Style.notVacant} className={this.props.$hover? 'cursor-hover' : null}>
