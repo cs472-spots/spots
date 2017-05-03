@@ -4,8 +4,12 @@ import Style from './Styles';
 class Spot extends Component {
 
   render() {
+    var spotColor = this.props.vacancy ? 'yellow' : 'green';
+    spotColor = this.props.authorized ? spotColor : 'red';
+    Style.border = `5px solid ${spotColor}`
+
     return (
-      <div style={this.props.vacancy ? Style.Vacant : Style.notVacant} className={this.props.$hover? 'cursor-hover' : null}>
+      <div style={Style} className={this.props.$hover? 'cursor-hover' : null}>
         <div className={this.props.showBalloon ? 'balloon open' : 'balloon'}>
           <div onClick={this.props.onClick} className="fa fa-times-circle-o circle-x"/>
           <div className='balloon-content'>
@@ -14,7 +18,7 @@ class Spot extends Component {
             </div>
             <div className='balloon-content content'>
               <strong>Name:</strong><br/>
-              <strong>Valid:</strong> {this.props.authorized}<br/>
+              <strong>Authorized:</strong> {this.props.authorized}<br/>
               <strong>Type:</strong> {this.props.type}<br/>
               <strong>Vacancy:</strong> {this.props.vacancy.toString()}<br/>
             </div>
