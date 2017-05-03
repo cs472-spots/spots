@@ -6,6 +6,7 @@ header {
   height: 50px;
   background-color: #00a65a;
 }
+
 /* ========================================================================= */
 /* BEGIN NAVIGATION BAR */
 /* spots' logo */
@@ -21,6 +22,30 @@ header {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   padding: 15px;
   background-color: #008c4c;
+}
+
+a.navbar-logo:link {
+  color: white;
+  cursor: default;
+  text-decoration: none;
+}
+
+a.navbar-logo:hover {
+  color: white;
+  cursor: default;
+  text-decoration: none;
+}
+
+a.navbar-logo:visited {
+  color: white;
+  text-decoration: none;
+  cursor: default;
+}
+
+a.navbar-logo:active {
+  color:white;
+  text-decoration: none;
+  cursor: default;
 }
 
 /* TOP NAVIGATION */
@@ -184,6 +209,10 @@ a.navbar-sidebar-toggle-button:active {
   display: block;
 }
 
+.sidebar-menu-item > i {
+  color: #b8c7ce;
+}
+
 a.sidebar-menu-item:hover {
   cursor: default;
   background-color: #1e272b;
@@ -234,12 +263,23 @@ a.sidebar-menu-item:visited {
 /* content */
 .content {
   position: absolute;
+  min-height: 100%;
+  padding: 15px;
+  left: 0;
+  right: 0;
+  top: 50px;
+  transition: left .2s ease-in-out;
+  background-color: #F8F8FF;
+  /*
+  position: absolute;
   top: 50px;
   left: 0;
   right: 0;
   height: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
   transition: left .2s ease-in-out;
-  background-color: #F8F8FF;
+  background-color: #F8F8FF;*/
 }
 /* END SIDE BAR */
 /* ========================================================================= */
@@ -250,4 +290,258 @@ a.sidebar-menu-item:visited {
 
 .content.open {
   left: 240px;
+}
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* ===================== C O N T E N T    H E A D E R ====================== */
+.space-left {
+  padding-left: 5px;
+}
+.content-header {
+  position: relative;
+  padding: 0px 0 0 0;
+}
+
+.content-header > h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.content-header > h1 > small {
+  font-size: 15px;
+  display: inline-block;
+  padding-left: 10px;
+  font-weight: 300;
+}
+
+.content-header > .breadcrumb {
+  float: right;
+  background: transparent;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 12px;
+  padding: 7px 0 0 0;
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  border-radius: 2px;
+}
+
+.content-header > .breadcrumb > li > a {
+  color: #444;
+  text-decoration: none;
+}
+.content-header > .breadcrumb > li > a > .fa,
+.content-header > .breadcrumb > li > a > .glyphicon,
+.content-header > .breadcrumb > li > a > .ion {
+  margin-right: 5px;
+}
+
+.content-header > .breadcrumb > li + li:before {
+  content: '>\00a0';
+}
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* ======================== S E A R C H    B A R =-========================= */
+.search-header {
+  margin: 15px 0 0 0;
+  padding: 5px;
+  background-color: #d2d6de;
+  height: 60px;
+  border-radius: 3px;
+}
+
+.search-header, .fa, .title {
+  color: #333333;
+}
+
+.searchIcon {
+  position: absolute;
+  color: #444;
+  right: 50px;
+  margin-top: -12px;
+  cursor: pointer;
+}
+
+.searchInput {
+  margin-top: 8px;
+  position: absolute;
+  right: 80px;
+  width: 400px;
+  height: 34px;
+  border-radius: 17px;
+  border: none;
+  padding-left: 25px;
+  background: #fff;
+  font-size: 13px;
+  color: #666;
+  opacity: 0;
+  pointer-events: none;
+  transition: all .3s ease-in-out;
+}
+
+.searchInput.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* ========================== F O R M   B O X ============================== */
+.box {
+  position: relative;
+  border-radius: 3px;
+  background-color: white;
+  border-top: 3px solid #d2d6de;
+  margin-top: 20px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.box.box-primary {
+  border-top-color: #3c8dbc;
+}
+
+.box.box-car {
+  border-top-color: #00a65a;
+}
+
+.box.box-office-use {
+  border-top-color: #f39c12;
+}
+
+.box.box-citations {
+  border-top-color: #dd4b39;
+}
+
+.box-header {
+  color: #444;
+  display: block;
+  padding: 10px;
+  position: relative;
+}
+
+.box-title {
+  display: inline-block;
+  font-size: 18px;
+  margin: 0;
+  line-height: 1;
+}
+
+.box-body {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 10px;
+}
+
+.form {
+  display: block;
+  margin-top: 0em;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
+}
+
+.form-control {
+  display: block;
+  border-radius: 0 !important;
+  box-shadow: none;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #555;
+  background-color: white;
+  border: 1px solid #ccc;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+/* ========================================================================= */
+/* ========================================================================= */
+/* ========================== SPOTS MAP ============================== */
+.circle-x {
+  position: absolute;
+  left: 278px;
+  top: 4px;
+}
+
+.cursor-hover {
+  cursor: pointer;
+}
+
+.balloon {
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.map-content {
+  position: absolute;
+  min-height: 90%;
+  padding: 15px;
+  left: 10px;
+  right: 10px;
+  top: 50px;
+  transition: left .2s ease-in-out;
+  background-color: #F8F8FF;
+}
+
+.balloon {
+  border-radius: 5px 20px 20px 20px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  width: 300px;
+  height: 0px;
+  top: 12px;
+  opacity: 0.2;
+  background-color: #fafafa;
+  font: 1em 'Open Sans';
+  line-height: 30px;
+  color: #345;
+  overflow: hidden;
+  z-index: 1001;
+  cursor: pointer;
+}
+.balloon.open {
+  height: 110px;
+  opacity: 1;
+  -moz-box-shadow:    3px 4px 2px 3px #999;
+  -webkit-box-shadow: 3px 4px 2px 3px #999;
+  box-shadow:         3px 4px 2px 3px #999;
+}
+.balloon-content {
+  background-color: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.balloon-content.header {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.balloon-content.content {
+  text-align: left;
+  font-size: 12px;
+  padding-top: 0;
+  padding-left: 10px;
+  margin-top: -25px;
+}
+
+br {
+  display: block;
+  margin-top: -15px;
+  line-height: -15px;
+  content: " "
 }

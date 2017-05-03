@@ -103,7 +103,7 @@ void loop() {
     // If the object left exit the loop
     if(digitalRead(Sensor_Pin))
       break;
-      
+
     // If the user timed out
     if(timer > timeLimit) {
       Serial.print("User time has expired...\n");
@@ -232,10 +232,8 @@ bool readCard() {
 // else, set it to false
 bool updateVacancy(String vacant)
 {
-  //String updatePath = createPath("update");
   String updatePath = "/spotsHW/update/1234/LB/0013/";
   const char * c;
-  unsigned int attemptNo = 0;
   String response = "";
   int statusCode = 0;
 
@@ -302,4 +300,3 @@ bool checkAuthorization()
   Serial.print("User is unauthorized. \n");
   return false;
 }
-

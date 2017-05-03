@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'nectarine';
+import SpotsMap from '../../components/SpotsMap';
 
-class Error404 extends Component {
+class Maps extends Component {
   render () {
     return (
-      <div className="Error-Class">
+      <div>
+        <SpotsMap/>
       </div>
-    )
+    );
   }
 }
 
@@ -15,6 +17,6 @@ const mapProps = (store) => {
 }
 
 export default connect({
-  component: Error404,
+  component: Maps,
   mapProps
 });

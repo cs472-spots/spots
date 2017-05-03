@@ -1,9 +1,10 @@
 //src/containers/Login/index.js
-import React, { Component, PropTypes as T } from 'react';
-import AuthService from '../../utils/AuthService';
+import React, { Component } from 'react';
+import T from 'prop-types';
 import { connect } from 'nectarine';
 
-import logo from './../../assets/logo.png';
+import SpotsMap from '../../components/SpotsMap';
+import AuthService from '../../utils/AuthService';
 
 class Login extends Component {
   static propTypes = {
@@ -13,19 +14,17 @@ class Login extends Component {
 
   render() {
     const { auth } = this.props;
-
+    auth.lock.show();
     return (
-      <div className="content">
-        <div className="Login-Header">
-          <img role="presentation" src={logo} onClick={auth.login.bind(this)}/>
-        </div>
-      </div>
+      <SpotsMap/>
     );
   }
 }
 
+
 const mapProps = (store) => {
-  return {}
+  return {
+  }
 }
 
 export default connect({

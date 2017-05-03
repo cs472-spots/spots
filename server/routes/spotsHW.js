@@ -2,19 +2,53 @@ var express = require('express');
 var uuid = require('uuid');
 var router = express.Router();
 var database = require("../src/database");
+var logger = require("../src/logger");
 
 var SPOTS_API_KEY = process.env.SPOTS_API_KEY;
-console.log("Using SPOTS_API_KEY = %s", SPOTS_API_KEY)
+logger("Using SPOTS_API_KEY = " + SPOTS_API_KEY)
+
+function handleApiKey(key, done) {
+  var err;
+  if(key != SPOTS_API_KEY) {
+    logger("Invalid API key received.");
+    err = new Error;
+  }
+  return done(err);
+}
 
 /*
   GET: retrieve users
 */
-router.get('/', (req, res, next) => {
-  database.ref('/UserAccounts').once('value', function(data){
-    var users = data.val();
-    console.log(users);
-    res.send({Users: users});
-  });
+router.get('/getUsers/:key', (req, res, next) => {
+  logger("getUsers called");
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/UserAccounts').once('value', function(data){
+      var users = data.val();
+      logger(users);
+      res.send({Users: users});
+    });
+  })
+});
+
+router.get('/getVacancy/:key/:lotID/:spotID', (req, res, next) => {
+  logger("getVacancy called");
+  handleApiKey(req.params.key, function(err) {
+    if(err) {
+      res.status(401).send({error:"invalid key"});
+      return;
+    }
+
+    database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID).once('value', function(data){
+      var spotVacancy = data.val().vacancy;
+      logger(req.params.spotID + ' vacancy is ' + spotVacancy);
+      res.send({Vacancy: spotVacancy});
+    });
+  })
 });
 
 
@@ -22,12 +56,13 @@ router.get('/', (req, res, next) => {
   POST (update): used for updating database if spot is vacant or taken
 */
 router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
-  console.log(req.params);
+  logger(req.params);
   var spot = database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID);
 
   //Check if API key is valid
   key = req.params.key;
   if(key != SPOTS_API_KEY) {
+    logger("Invalid API key received.");
     res.status(401).send({error:"invalid key"});
     return;
   }
@@ -35,6 +70,7 @@ router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
   //Check if spot is vacant or occupied
   if(req.params.vacant == 'true'){
     //Update Firebase
+    logger("Updating Firebase with a vacant spot.")
     spot.update({
       occupant: null,
       authorized: null,
@@ -63,7 +99,7 @@ router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
   POST (swipe): used for swiping in
 */
 router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
-  console.log(req.params);
+  logger(req.params);
   var spot = database.ref('/Spots/' + req.params.lotID + '/' + req.params.spotID);
 
   //Check if API key is valid
@@ -91,21 +127,21 @@ router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
 
     //if occupant exists
     if(snapshot.val()!=null){
-      console.log('User is:' + cardHolder);
+      logger('User is:' + cardHolder);
 
       //Check if parking types match
       var parkType, upermitType;
 
       spot.once('value', function(psnapshot){
-        console.log('Parking Type: ' + psnapshot.val().type);
+        logger('Parking Type: ' + psnapshot.val().type);
 
         var u = database.ref('/UserAccounts/' + cardHolder + '/permit');
         u.once('value', function(usnapshot){
-          console.log('User Permit type:' + usnapshot.val().type);
+          logger('User Permit type:' + usnapshot.val().type);
 
           if(psnapshot.val().type===usnapshot.val().type){
             //if same type
-            console.log('Types match.');
+            logger('Types match.');
             spot.update({
               authorized: true,
               occupant: parseInt(cardHolder)
@@ -114,7 +150,7 @@ router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
           }
           else{
             //if types don't match
-            console.log('Types do not match.');
+            logger('Types do not match.');
             spot.update({
               authorized: false,
               occupant: parseInt(cardHolder)
@@ -125,7 +161,7 @@ router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
       });
     }else if(snapshot.val()==null){
       //if card doesn't exist in database
-      console.log(req.params.cardID + ' does not have a user');
+      logger(req.params.cardID + ' does not have a user');
       spot.update({
         authorized: false,
         cardID: ucardID,
@@ -138,9 +174,9 @@ router.post('/swipe/:key/:lotID/:spotID/:cardID?', (req, res, next) => {
 
 var syncStatus = function(error){
   if(error){
-    console.log ('Synchronization failed.')
+    logger ('Synchronization failed.')
   }else{
-    console.log ('Synchronization success.')};
+    logger ('Synchronization success.')};
 }
 
 module.exports = router;

@@ -2,8 +2,8 @@ import React from 'react';
 
 class SideBar extends React.Component {
 
-
   render() {
+    const { profile } = this.props;
     var sidebarClass = this.props.isOpen ? 'sidebar open' : 'sidebar';
 
     return (
@@ -14,10 +14,10 @@ class SideBar extends React.Component {
           }
           <div className="user-panel">
             <div className="user-pull-left">
-              <img src="img/jedi.jpg" className="user-panel-image"></img>
+              <img role="presentation" src="img/hey_reb.png" className="user-panel-image"></img>
             </div>
             <div className="user-pull-left-info">
-              <p>Hello obi-wan</p>
+              <p>Hello { profile.name }</p>
               <i className="user-online"></i>
               <i className="user-online-msg">Online</i>
             </div>
@@ -29,26 +29,32 @@ class SideBar extends React.Component {
         <ul className="sidebar-menu">
           <li className="sidebar-menu-header">MAIN NAVIGATION</li>
           <li>
-            <a href="#/register" className="sidebar-menu-item">
-              <i className="fa fa-edit"></i>
+            <a href="#/app/register" className="sidebar-menu-item">
+              <i className="fa fa-user-plus"></i>
               <span className="sidebar-menu-item-text">Register Students</span>
             </a>
           </li>
           <li>
-            <a href="#/view_accounts" className="sidebar-menu-item">
-              <i className="fa fa-book"></i>
-              <span className="sidebar-menu-item-text">View Payments & Fees</span>
+            <a href="#/app/view_accounts" className="sidebar-menu-item">
+              <i className="fa fa-users"></i>
+              <span className="sidebar-menu-item-text">View Accounts</span>
             </a>
           </li>
           <li>
-            <a href="#/monitor_spots" className="sidebar-menu-item">
-              <i className="fa fa-laptop"></i>
+            <a href="#/app/manage_accounts" className="sidebar-menu-item">
+              <i className="fa fa-edit"></i>
+              <span className="sidebar-menu-item-text">Manage Accounts</span>
+            </a>
+          </li>
+          <li>
+            <a href="#/app/monitor_spots" className="sidebar-menu-item">
+              <i className="fa fa-automobile"></i>
               <span className="sidebar-menu-item-text">Monitor Spots</span>
             </a>
           </li>
           <li>
-            <a href="#/login" onClick={this.props.onClick} className="sidebar-menu-item">
-              <i className="fa fa-laptop"></i>
+            <a href="#/app/login" onClick={this.props.onClick} className="sidebar-menu-item">
+              <i className="fa fa-sign-out"></i>
               <span className="sidebar-menu-item-text">Logout</span>
             </a>
           </li>

@@ -4,7 +4,10 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var fs = require('fs');
 var database = require("./src/database");
+var logger = require("./src/logger");
 var spotsHW = require("./routes/spotsHW");
+//var spotsMobile = require('./routes/spotsMobile');
+//var parks = require("./park/parking");
 var Enum = require('enum');
 
 var permitType = new Enum(['none', 'Student', 'Faculty']);
@@ -18,22 +21,28 @@ app.use(express.static('frontend/build'));
 // REST API connector
 app.use('/spotsHW', spotsHW);
 
+// Parking Page
+//app.use('/parkingSpots', parks);
+//app.use('/Mobile, spotsMobile');
+
 //home
+
 app.get('/', function(request, response) {
   response.send(fs.readFileSync('index.html', {encoding: 'utf8'}));
-  console.log("responded to client")
+  logger("responded to client");
 });
 
-io.on('connection', (socket) => {
-  console.log("Client connected - " + socket.id);
 
-  socket.on('client', (data) => {
+io.on('connection', (socket) => {
+  logger("Client connected - " + socket.id);
+
+  socket.on('client', (data, response) => {
     var userProfile = data;
     switch(data.client){
       case 'Admin':
         //Receive JSON Object
-        console.log("Received the following data from admin: \n");
-        console.log(data);
+        logger("Received the following data from admin: \n");
+        logger(data);
 
         switch(data.flag){
           case 'delete':
@@ -45,12 +54,20 @@ io.on('connection', (socket) => {
           case 'viewUser':
             viewUser(userProfile.userID);
             break;
+          case 'get-spots':
+            console.log("LOOKING FOR THE SPOTS!!!");
+            var spotsRef = database.ref('Spots/LB');
+            spotsRef.once('value', (snapshot) => {
+              const spots = snapshot.val();
+              console.log(spots);
+              response(spots);
+            })
         }
         break;
       case 'Mobile':
         //Receive JSON Object
-        console.log("Received the following data from mobile: \n");
-        console.log(data);
+        logger("Received the following data from mobile: \n");
+        logger(data);
 
         switch(data.flag){
           case 'delete':
@@ -70,13 +87,13 @@ io.on('connection', (socket) => {
 
   //Reply to application after receiving hello message
   socket.on('hello', (msg)=> {
-      console.log("Message received: " + msg);
+      logger("Message received: " + msg);
       socket.emit('reply', "hello from the server side");
   });
 });
 
 server.listen(app.get('port'), function() {
-  console.log("Spots server is running on http://localhost:%s", app.get('port'));
+  logger("Spots server is running on port " + app.get('port'));
 });
 
 //--------------------------------------------------------------------------------------------
@@ -89,10 +106,11 @@ server.listen(app.get('port'), function() {
 function registerUser(userProfile){
   var userIDRef = database.ref('UserAccounts/' + userProfile.userID);
 
-  //console.log('Password passed to registerUser() is: ' + userProfile.password);
+/*
+  //logger('Password passed to registerUser() is: ' + userProfile.password);
   //Hash password for security
   var passwd = hashFunction(userProfile.password);
-  console.log('Hash successfully returned: ' + passwd);
+  logger('Hash successfully returned: ' + passwd);
 
   database.ref('UserAccounts/' + userProfile.userID + '/LoginCredentials').set({
     Username: userProfile.username,
@@ -104,7 +122,7 @@ function registerUser(userProfile){
   login.set({
     Password: passwd
   });
-
+*/
   userIDRef.set({
     firstName: userProfile.firstName,
     lastName: userProfile.lastName,
@@ -121,16 +139,18 @@ function registerUser(userProfile){
       type: userProfile.permitType
     });
 
-    console.log('Number of vehicles: ' + userProfile.vehicleInt);
+    logger('Number of vehicles: ' + userProfile.vehicleInt);
     if(userProfile.vehicleInt<=2){
-      database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v1').set({
+      database.ref('UserAccounts/' + userProfile.userID + '/vehicles/vehicle1').set({
+        //year: userProfile.v1_year,
         make: userProfile.v1_make,
         model: userProfile.v1_model,
         color: userProfile.v1_color,
         licensePlate: userProfile.v1_plate
       });
       if(userProfile.vehicleInt===2){
-        database.ref('UserAccounts/' + userProfile.userID + '/vehicles/v2').set({
+        database.ref('UserAccounts/' + userProfile.userID + '/vehicles/vehicle2').set({
+          //year: userProfile.v2_year,
           make: userProfile.v2_make,
           model: userProfile.v2_model,
           color: userProfile.v2_color,
@@ -158,7 +178,7 @@ function registerUser(userProfile){
 //Creates hash for user password
 //Paramters: (string)
 function hashFunction(password){
-  console.log('password is: ' + password + '\n');
+  logger('password is: ' + password + '\n');
   var hash = "";
   var len = password.length;
   var shift = 3;
@@ -177,14 +197,14 @@ function hashFunction(password){
       hash += text.charAt(i);
   }
 
-  console.log('Returning hash now');
+  logger('Returning hash now');
   return hash;
 }
 
 //Deletes a user
 //Parameters(int)
 function deleteUser(userID){
-  console.log('Deleting the following user: ' + userID);
+  logger('Deleting the following user: ' + userID);
   var user = database.ref('UserAccounts/' + userID);
   user.remove();
 
@@ -195,10 +215,10 @@ function deleteUser(userID){
 //Views a user's account
 //Parameters(int)
 function viewUser(userID){
-  console.log('Viewing the following user: ' + userID);
+  logger('Viewing the following user: ' + userID);
 
   database.ref('UserAccounts/' + userID).once('value', function(snapshot){
-    console.log(snapshot.val());
+    logger(snapshot.val());
     if(snapshot.val()===null)
       io.emit('userInfo', 'Error. User does not exist.');
     else{
@@ -208,33 +228,34 @@ function viewUser(userID){
         firstName: snapshot.val().firstName,
         lastName: snapshot.val().lastName,
         email: snapshot.val().userEmail,
-        phone: snapshot.val().phone
+        phone: snapshot.val().phone,
+        cardid: snapshot.val().cardID
       };
 
       if(snapshot.val().permit != null){
         userInfo.permitType = snapshot.val().permit.type;
         userInfo.purchaseDate = snapshot.val().permit.purchaseDate;
-        userInfo.expDate = snapshot.val().expDate;
+        userInfo.expDate = snapshot.val().permit.expDate;
 
         if(snapshot.val().vehicles !=null){
-          userInfo.v1_make = snapshot.val().vehicles.v1.make;
-          userInfo.v1_model = snapshot.val().vehicles.v1.model;
-          userInfo.v1_color = snapshot.val().vehicles.v1.color;
-          userInfo.v1_plate = snapshot.val().vehicles.v1.licensePlate;
+          //userInfo.v1_year = snapshot.val().vehicles.v1.year;
+          userInfo.v1_make = snapshot.val().vehicles.vehicle1.make;
+          userInfo.v1_model = snapshot.val().vehicles.vehicle1.model;
+          userInfo.v1_color = snapshot.val().vehicles.vehicle1.color;
+          userInfo.v1_plate = snapshot.val().vehicles.vehicle1.licensePlate;
 
-          if(snapshot.val().vehicles.v2 !=null){
-            userInfo.v2_make = snapshot.val().vehicles.v2.make;
-            userInfo.v2_model = snapshot.val().vehicles.v2.model;
-            userInfo.v2_color = snapshot.val().vehicles.v2.color;
-            userInfo.v2_plate = snapshot.val().vehicles.v2.licensePlate;
+          if(snapshot.val().vehicles.vehicle2 !=null){
+            //userInfo.v2_year = snapshot.val().vehicles.v2.year;
+            userInfo.v2_make = snapshot.val().vehicles.vehicle2.make;
+            userInfo.v2_model = snapshot.val().vehicles.vehicle2.model;
+            userInfo.v2_color = snapshot.val().vehicles.vehicle2.color;
+            userInfo.v2_plate = snapshot.val().vehicles.vehicle2.licensePlate;
           }
         }
       }
     }
 
-    console.log(userInfo);
+    logger(userInfo);
     io.emit('userInfo', userInfo);
   });
-
-
 }
