@@ -261,7 +261,7 @@ function viewUser(userID){
 //Parameters: None
 function notifySpotUpdate(){
   var spotsRef = database.ref('Spots/LB');
-  spotsRef.on('value', (snapshot) => {
+  spotsRef.on('child_changed', (snapshot) => {
     var spots = snapshot.val();
     console.log(spots);
     /*
