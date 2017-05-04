@@ -25,6 +25,10 @@ const sessionSlice = createSlice({
       })
     },
     getSpots: function() {
+      this.slice.socket.$get().on('spotUpdate', (data)=>{
+        console.log('========================================');
+        console.log(data);
+      });
       return this.slice.spots.$get();
     },
     setNotify: function() {

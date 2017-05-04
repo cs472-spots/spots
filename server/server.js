@@ -43,8 +43,9 @@ io.on('connection', (socket) => {
       vacancy: snapshot.val().vacancy
     }
 
-    console.log('SpotINfo', spotInfo);
-    socket.emit('spotUpdate', spots);
+    console.log('===========');
+    console.log('sending spot info');
+    socket.emit('spotUpdate', spotInfo);
   });
 
   socket.on('client', (data, response) => {
@@ -66,11 +67,9 @@ io.on('connection', (socket) => {
             viewUser(userProfile.userID);
             break;
           case 'get-spots':
-            console.log("LOOKING FOR THE SPOTS!!!");
             var spotsRef = database.ref('Spots/LB');
             spotsRef.once('value', (snapshot) => {
               const spots = snapshot.val();
-              console.log(spots);
               response(spots);
             })
         }
@@ -282,10 +281,8 @@ function notifySpotUpdate(){
   var spotsRef = database.ref('Spots/LB');
   spotsRef.on('child_changed', (snapshot) => {
     var spots = snapshot.val();
-    console.log(spots);
 
     var key = snapshot.key;
-    console.log('key is ' + key);
 
 
     var spotInfo = {
