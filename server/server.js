@@ -8,12 +8,6 @@ var logger = require("./src/logger");
 var spotsHW = require("./routes/spotsHW");
 //var spotsMobile = require('./routes/spotsMobile');
 //var parks = require("./park/parking");
-var Enum = require('enum');
-
-var permitType = new Enum(['none', 'Student', 'Faculty']);
-var None = permitType.get(1);
-var Student = permitType.get(2);
-var Faculty = permitType.get(3);
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static('frontend/build'));
@@ -21,9 +15,6 @@ app.use(express.static('frontend/build'));
 // REST API connector
 app.use('/spotsHW', spotsHW);
 
-// Parking Page
-//app.use('/parkingSpots', parks);
-//app.use('/Mobile, spotsMobile');
 
 //home
 
@@ -32,9 +23,10 @@ app.get('/', function(request, response) {
   logger("responded to client");
 });
 
-
 io.on('connection', (socket) => {
   logger("Client connected - " + socket.id);
+
+  notifySpotUpdate();
 
   socket.on('client', (data, response) => {
     var userProfile = data;
@@ -78,6 +70,9 @@ io.on('connection', (socket) => {
             break;
           case 'viewUser':
             viewUser(userProfile.userID);
+            break;
+          case 'loadMap':
+            loadMap();
             break;
         }
 
@@ -260,4 +255,34 @@ function viewUser(userID){
     logger(userInfo);
     io.emit('userInfo', userInfo);
   });
+}
+
+//Fucntion to notify clients to update parking map
+//Parameters: None
+function notifySpotUpdate(){
+  var spotsRef = database.ref('Spots/LB');
+  spotsRef.on('value', (snapshot) => {
+    var spots = snapshot.val();
+    console.log(spots);
+    /*
+    var key = snapshot.parent();
+    console.log('parent is ' + key);
+    /*
+    var spotInfo = {
+      //spotID: snapshot.key(),
+      authorized: snapshot.val().authorized,
+      occupant: snapshot.val().occupant,
+      vacancy: snapshot.val().vacancy
+    }*/
+    io.emit('spotUpdate', spots);
+  })
+}
+
+function loadMap(){
+  var spotsRef = database.ref('Spots/LB');
+  spotsRef.on('value', (snapshot) => {
+    var spots = snapshot.val();
+    console.log(spots);
+    io.emit('loadMap', spots);
+  })
 }
