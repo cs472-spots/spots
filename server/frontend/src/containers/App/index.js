@@ -21,6 +21,12 @@ class App extends Component {
     this.handleViewSidebar = this.handleViewSidebar.bind(this);
   }
 
+  getSpotUpdate(){
+    this.socket.on('spotUpdate', (data)=>{
+      console.log(data);
+    });
+  }
+
   //Other Functions
   logout() {
     this.props.route.auth.logout();
