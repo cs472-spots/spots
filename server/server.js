@@ -26,7 +26,26 @@ app.get('/', function(request, response) {
 io.on('connection', (socket) => {
   logger("Client connected - " + socket.id);
 
-  notifySpotUpdate();
+  var spotsRef = database.ref('Spots/LB');
+
+  spotsRef.on('child_changed', (snapshot) => {
+    var spots = snapshot.val();
+    console.log(spots);
+
+    var key = snapshot.key;
+    console.log('key is ' + key);
+
+
+    var spotInfo = {
+      spotID: key,
+      authorized: snapshot.val().authorized,
+      occupant: snapshot.val().occupant,
+      vacancy: snapshot.val().vacancy
+    }
+
+    console.log('SpotINfo', spotInfo);
+    socket.emit('spotUpdate', spots);
+  });
 
   socket.on('client', (data, response) => {
     var userProfile = data;

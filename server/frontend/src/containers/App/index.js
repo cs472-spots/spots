@@ -40,7 +40,7 @@ class App extends Component {
   componentWillMount () {
       this.props.setSocket(SocketIOClient(location.origin));
       setTimeout (this.props.setNotify, 10000);
-      var intervalId = setInterval(this.updateSpots, 60000);
+      var intervalId = setInterval(this.updateSpots, process.env.NOTIFICATION_INTERVAL);
       this.setState ({
         intervalId: intervalId
       })
