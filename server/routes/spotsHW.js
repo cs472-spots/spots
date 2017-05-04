@@ -72,8 +72,8 @@ router.post('/update/:key/:lotID/:spotID/:vacant?', (req, res, next) => {
     //Update Firebase
     logger("Updating Firebase with a vacant spot.")
     spot.update({
-      occupant: null,
-      authorized: null,
+      occupant: '',
+      authorized: true,
       vacancy: true
     }, syncStatus);
 
