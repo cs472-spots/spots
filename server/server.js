@@ -264,16 +264,19 @@ function notifySpotUpdate(){
   spotsRef.on('child_changed', (snapshot) => {
     var spots = snapshot.val();
     console.log(spots);
-    /*
-    var key = snapshot.parent();
-    console.log('parent is ' + key);
-    /*
+
+    var key = snapshot.key;
+    console.log('key is ' + key);
+
+
     var spotInfo = {
-      //spotID: snapshot.key(),
+      spotID: key,
       authorized: snapshot.val().authorized,
       occupant: snapshot.val().occupant,
       vacancy: snapshot.val().vacancy
-    }*/
+    }
+
+    console.log('SpotINfo', spotInfo);
     io.emit('spotUpdate', spots);
   })
 }
