@@ -30,7 +30,8 @@ class SpotsMap extends Component {
   constructor () {
     super();
     this.state = {
-      showBalloon: false
+      showBalloon: false,
+      intervalId: ''
     }
   }
 
@@ -66,6 +67,10 @@ class SpotsMap extends Component {
     this.props.setSpots();
   }
 
+  componentWillUnmount () {
+    clearInterval (this.state.intervalId);
+  }
+
    render() {
     return (
       <GoogleMapReact
@@ -78,6 +83,7 @@ class SpotsMap extends Component {
         hoverDistance={15 /*Change this value, in example K_CIRCLE_SIZE/2 ?*/}
       >
         {this.renderSpots()}
+
       </GoogleMapReact>
     )
   }

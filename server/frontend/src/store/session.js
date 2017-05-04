@@ -9,7 +9,8 @@ const sessionSlice = createSlice({
       },
       spots: _({type: 'object'}),
       socket: _,
-      spotIndex: _({type: 'number'})
+      spotIndex: _({type: 'number'}),
+      notifications: _
     };
   },
 
@@ -25,6 +26,17 @@ const sessionSlice = createSlice({
     },
     getSpots: function() {
       return this.slice.spots.$get();
+    },
+    setNotify: function() {
+      var counter = 0;
+      var spots = this.slice.spots.$get();
+      Object.keys(spots).map((key, index) => {
+        if(spots[key].authorized === false) {
+          counter += 1;
+        }
+        return null;
+      });
+      this.slice.notifications.$set(counter);
     }
   }
 })

@@ -154,6 +154,7 @@ class Register extends Component {
                         className="form-control"
                         name="fname"
                         type="text"
+                        placeholder="First Name"
                         value={this.state.fname}
                         onChange={this.handleChange} />
                   </div>
@@ -164,16 +165,18 @@ class Register extends Component {
                         className="form-control"
                         name="lname"
                         type="text"
+                        placeholder="Last Name"
                         value={this.state.lname}
                         onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label>NSHE</label>
+                    <label>NSHE ID #</label>
                       <input
                         className="form-control"
                         name="NSHE"
                         type="text"
+                        placeholder="NSHE ID #"
                         value={this.state.NSHE}
                         onChange={this.handleChange} />
                   </div>
@@ -184,16 +187,18 @@ class Register extends Component {
                         className="form-control"
                         name="email"
                         type="email"
+                        placeholder="Email"
                         value={this.state.email}
                         onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label>Phone Number (i.e. 7022589201)</label>
+                    <label>Phone Number</label>
                       <input
                         className="form-control"
                         name="pnum"
                         type="text"
+                        placeholder="Phone Number"
                         value={this.state.pnum}
                         onChange={this.handleChange} />
                   </div>
@@ -217,36 +222,40 @@ class Register extends Component {
                         className="form-control"
                         name="vYear"
                         type="text"
+                        placeholder="Year"
                         value={this.state.vYear}
                         onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label>Color (i.e. Blue)</label>
+                    <label>Color</label>
                       <input
                         className="form-control"
                         name="vColor"
                         type="text"
+                        placeholder="Color"
                         value={this.state.vColor}
                         onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label>Car Make (i.e. Ford)</label>
+                    <label>Car Make</label>
                     <input
                       className="form-control"
                       name="vMake"
                       type="text"
+                      placeholder="Make"
                       value={this.state.vMake}
                       onChange={this.handleChange} />
                   </div>
 
                   <div className="form-group">
-                    <label>Model (i.e. Fusion)</label>
+                    <label>Model</label>
                     <input
                       className="form-control"
                       name="vModel"
                       type="text"
+                      placeholder="Model"
                       value={this.state.vModel}
                       onChange={this.handleChange} />
                   </div>
@@ -257,6 +266,7 @@ class Register extends Component {
                         className="form-control"
                         name="vLic"
                         type="text"
+                        placeholder="License Plate Number"
                         value={this.state.vLic}
                         onChange={this.handleChange} />
                   </div>
@@ -278,6 +288,7 @@ class Register extends Component {
                         className="form-control"
                         name="cid"
                         type="text"
+                        placeholder="Card ID"
                         value={this.state.cid}
                         onChange={this.handleChange} />
                   </div>
