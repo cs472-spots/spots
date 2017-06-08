@@ -1,0 +1,1 @@
+import Spots from './src/Spots';
